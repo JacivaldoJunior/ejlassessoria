@@ -93,10 +93,10 @@
   <section class="text-center py-16 px-4">
     <p class="text-lg mb-8 max-w-2xl mx-auto">Ofereça acompanhamento psicológico e suporte completo para colaboradores. Reduza afastamentos e aumente a produtividade.</p>
     <img src="https://images.unsplash.com/photo-1556228720-66c9e9f5a0f9?auto=format&fit=crop&w=800&q=80" alt="Psicóloga atendendo" class="mx-auto rounded-lg shadow-md w-full max-w-xl mb-8" />
-    <form class="bg-white max-w-xl mx-auto shadow-md rounded-lg p-6 grid gap-4">
-      <input type="text" placeholder="Nome" class="border p-3 rounded w-full" />
-      <input type="email" placeholder="E-mail corporativo" class="border p-3 rounded w-full" />
-      <input type="tel" placeholder="Telefone" class="border p-3 rounded w-full" />
+    <form action="https://formspree.io/f/xknlpqyr" method="POST" class="bg-white max-w-xl mx-auto shadow-md rounded-lg p-6 grid gap-4">
+      <input type="text" name="nome" placeholder="Nome" class="border p-3 rounded w-full" />
+      <input type="email" name="email" placeholder="E-mail corporativo" class="border p-3 rounded w-full" />
+      <input type="tel" name="telefone" placeholder="Telefone" class="border p-3 rounded w-full" />
       <button class="bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition">Quero saber mais</button>
     </form>
   </section>
@@ -185,7 +185,28 @@
       formCadastro.classList.add('hidden');
       formLogin.scrollIntoView({ behavior: 'smooth' });
     });
+
+    // Validação simples para formulário "Quero saber mais"
+    document.querySelector("form[action*='formspree.io']").addEventListener("submit", function (e) {
+      const nome = this.querySelector('input[name="nome"]').value.trim();
+      const email = this.querySelector('input[name="email"]').value.trim();
+      const tel = this.querySelector('input[name="telefone"]').value.trim();
+
+      if (!nome || !email || !tel) {
+        e.preventDefault();
+        alert("Por favor, preencha todos os campos.");
+      } else if (!email.includes("@")) {
+        e.preventDefault();
+        alert("E-mail inválido.");
+      }
+    });
   </script>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="https://wa.me/55SEUNUMERO" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg z-50 transition">
+    💬
+  </a>
 
 </body>
 </html>
