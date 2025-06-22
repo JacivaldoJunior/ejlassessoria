@@ -5,8 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EJL Assessoria</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Adicionando CDN do Font Awesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+
   <style>
     .hidden { display: none; }
+
+    /* Estilo para botão flutuante WhatsApp usando Font Awesome */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: #25d366;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      font-size: 28px;
+      text-decoration: none;
+      z-index: 9999;
+    }
+    .whatsapp-btn:hover {
+      background-color: #128c7e;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -28,16 +59,16 @@
         <div class="text-green-600 font-bold text-lg">EJL Assessoria</div>
       </div>
 
-      <nav class="flex items-center space-x-4">
-        <button class="text-green-700 font-medium hover:text-green-900 transition hidden md:inline">Para empresas</button>
-        <button class="text-green-700 font-medium hover:text-green-900 transition hidden md:inline">Para beneficiários</button>
-        <button class="text-green-700 font-medium hover:text-green-900 transition hidden md:inline">Para profissionais</button>
-        <div class="flex items-center gap-2">
-          <button id="btnCadastro" class="bg-green-600 text-white w-9 h-9 text-xs rounded-full font-semibold hover:bg-green-700 transition flex items-center justify-center">
-            +
+      <nav class="hidden md:flex items-center space-x-4">
+        <button class="text-green-700 font-medium hover:text-green-900 transition">Para empresas</button>
+        <button class="text-green-700 font-medium hover:text-green-900 transition">Para beneficiários</button>
+        <button class="text-green-700 font-medium hover:text-green-900 transition">Para profissionais</button>
+        <div class="flex items-center gap-3">
+          <button id="btnCadastro" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
+            Criar conta
           </button>
-          <button id="btnLogin" class="bg-green-600 text-white w-9 h-9 text-xs rounded-full font-semibold hover:bg-green-700 transition flex items-center justify-center">
-            ↻
+          <button id="btnLogin" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
+            Entrar
           </button>
         </div>
       </nav>
@@ -79,11 +110,6 @@
         <button class="bg-green-600 text-white px-6 py-3 rounded font-semibold hover:bg-green-700 transition">
           Quero cuidar da minha empresa
         </button>
-
-        <!-- NOVO TEXTO ADICIONADO -->
-        <h3 class="text-xl font-bold text-green-800 mt-6">
-          Conheça nosso programa de saúde emocional para empresas
-        </h3>
       </div>
       <div>
         <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"
@@ -94,12 +120,79 @@
     </div>
   </section>
 
-  <!-- Botão flutuante do WhatsApp -->
-  <a href="https://wa.me/seunumerodetelefone" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-50">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="w-6 h-6">
-      <path d="M380.9 97.1C339-13.4 197.8-31.2 113.5 59.7 51.5 126.4 42.4 219.8 87.6 293L40.1 452.6c-2.6 9.5 6.4 18.2 15.6 15.1l142.7-49.5c68.1 29.9 147.3 14.4 198.2-39.4 77.4-81.3 58.6-218.2-15.7-282.7zM227.9 392.6c-27.5-1.6-54.3-9.2-77.5-22.6l-12.3-7.1-84.4 29.3 28.7-85.3-8-12.6C49.2 251.7 44.2 168 110.4 104.3c55.3-52.2 143.2-49.7 197.2 5.3 53.9 55 56.3 142.9 5.2 197.2-27.1 28.6-65.3 45.5-105.1 45.5h-.1z"/>
-    </svg>
-  </a>
+  <!-- Banner principal com formulário -->
+  <section class="text-center py-16 px-4">
+    <p class="text-lg mb-8 max-w-2xl mx-auto">Ofereça acompanhamento psicológico e suporte completo para colaboradores. Reduza afastamentos e aumente a produtividade.</p>
+    <img src="https://images.unsplash.com/photo-1556228720-66c9e9f5a0f9?auto=format&fit=crop&w=800&q=80" alt="Psicóloga atendendo" class="mx-auto rounded-lg shadow-md w-full max-w-xl mb-8" />
+    <form action="https://formspree.io/f/xknlpqyr" method="POST" class="bg-white max-w-xl mx-auto shadow-md rounded-lg p-6 grid gap-4">
+      <input type="text" name="nome" placeholder="Nome" class="border p-3 rounded w-full" />
+      <input type="email" name="email" placeholder="E-mail corporativo" class="border p-3 rounded w-full" />
+      <input type="tel" name="telefone" placeholder="Telefone" class="border p-3 rounded w-full" />
+      <button class="bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition">Quero saber mais</button>
+    </form>
+  </section>
+
+  <!-- Benefícios -->
+  <section class="bg-green-100 py-12">
+    <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-3 gap-6 text-center">
+      <div>
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Colaboradores felizes" class="w-full h-48 object-cover rounded mb-4" />
+        <h3 class="text-xl font-bold mb-2 text-green-800">+Engajamento</h3>
+        <p>Colaboradores mais motivados e produtivos.</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Equipe em reunião" class="w-full h-48 object-cover rounded mb-4" />
+        <h3 class="text-xl font-bold mb-2 text-green-800">Redução de Afastamentos</h3>
+        <p>Menos licenças e absenteísmo.</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80" alt="Ambiente de trabalho saudável" class="w-full h-48 object-cover rounded mb-4" />
+        <h3 class="text-xl font-bold mb-2 text-green-800">Clima Organizacional</h3>
+        <p>Ambiente de trabalho mais saudável e colaborativo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-100 py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-center mb-10 text-green-800">Perguntas Frequentes</h3>
+      <div class="space-y-4">
+        <details class="bg-white p-4 rounded shadow">
+          <summary class="font-semibold cursor-pointer">Como funciona o programa de acompanhamento psicológico?</summary>
+          <p class="mt-2">Oferecemos sessões com psicólogos certificados, acompanhamento por aplicativo e relatórios mensais para RH.</p>
+        </details>
+        <details class="bg-white p-4 rounded shadow">
+          <summary class="font-semibold cursor-pointer">Qual o custo por colaborador?</summary>
+          <p class="mt-2">O valor varia conforme o plano contratado. Solicite um orçamento personalizado através do formulário.</p>
+        </details>
+        <details class="bg-white p-4 rounded shadow">
+          <summary class="font-semibold cursor-pointer">Como faço para contratar?</summary>
+          <p class="mt-2">Basta preencher o formulário no início da página ou entrar em contato via WhatsApp.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVA SEÇÃO COM SUA IMAGEM LOCAL -->
+  <section class="bg-white py-20 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-10">
+        Conheça nosso programa de saúde <br class="hidden md:block" />
+        emocional para empresas
+      </h2>
+
+      <img
+        src="minha-imagem.png"
+        alt="Imagem de saúde emocional"
+        class="mx-auto max-w-md w-full rounded-lg shadow"
+      />
+
+      <p class="mt-6 text-gray-700 max-w-2xl mx-auto">
+        Nosso programa oferece acompanhamento psicológico com base em dados e conexões entre colaboradores, promovendo uma cultura de bem-estar contínuo.
+      </p>
+    </div>
+  </section>
 
   <!-- Rodapé -->
   <footer class="text-center py-6 text-sm text-gray-500">
@@ -123,7 +216,32 @@
       formCadastro.classList.add('hidden');
       formLogin.scrollIntoView({ behavior: 'smooth' });
     });
+
+    // Validação simples para formulário "Quero saber mais"
+    document.querySelector("form[action*='formspree.io']").addEventListener("submit", function (e) {
+      const nome = this.querySelector('input[name="nome"]').value.trim();
+      const email = this.querySelector('input[name="email"]').value.trim();
+      const tel = this.querySelector('input[name="telefone]').value.trim();
+
+      if (!nome || !email || !tel) {
+        e.preventDefault();
+        alert("Por favor, preencha todos os campos.");
+      } else if (!email.includes("@")) {
+        e.preventDefault();
+        alert("E-mail inválido.");
+      }
+    });
   </script>
+
+  <!-- Botão flutuante WhatsApp com Font Awesome -->
+  <a
+    href="https://wa.me/5511999999999"
+    target="_blank"
+    class="whatsapp-btn"
+    aria-label="WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
 </body>
 </html>
