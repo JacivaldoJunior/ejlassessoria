@@ -199,15 +199,14 @@
     const formLogin = document.getElementById('formLogin');
 
     btnCadastro.addEventListener('click', () => {
-      formCadastro.classList.remove('hidden');
-      formLogin.classList.add('hidden');
-      formCadastro.scrollIntoView({ behavior: 'smooth' });
+      if (formCadastro) formCadastro.classList.remove('hidden');
+      if (formLogin) formLogin.classList.add('hidden');
+      if (formCadastro) formCadastro.scrollIntoView({ behavior: 'smooth' });
     });
 
     btnLogin.addEventListener('click', () => {
-      formLogin.classList.remove('hidden');
-      formCadastro.classList.add('hidden');
-      formLogin.scrollIntoView({ behavior: 'smooth' });
+      // Redireciona para a página do formulário NR-01
+      window.location.href = 'formulario.html';
     });
 
     // Validação simples para formulário "Quero saber mais"
