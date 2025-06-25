@@ -3,63 +3,507 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pesquisa NR-01</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Formulário de Pesquisa - EJL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      max-width: 900px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    select, input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="bg-white p-6">
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-2xl font-bold text-center mb-8">Pesquisa: Atualização da NR-01</h1>
-    <form id="pesquisa-form" class="space-y-6">
-      
-      <!-- Pergunta 1 -->
-      <div>
-        <label class="font-semibold">1. Você conhece a Norma Regulamentadora NR-01?</label>
-        <div class="mt-2 space-x-4">
-          <label><input type="radio" name="nr01_conhece" value="Sim" required> Sim</label>
-          <label><input type="radio" name="nr01_conhece" value="Não"> Não</label>
-        </div>
-      </div>
+<body>
+  <h1>Pesquisa com Funcionários - EJL Assessoria</h1>
+  <form action="https://script.google.com/macros/s/AKfycbxxkzUIMar8i8JqWoLnDDpuRTwWtIYpQeqGc0OXrT8qMGp6sikRjSTUNGetmNLXd8M/exec" method="POST">
 
-      <!-- Pergunta 2 -->
-      <div>
-        <label class="font-semibold">2. Você sabia que a NR-01 foi atualizada recentemente?</label>
-        <div class="mt-2 space-x-4">
-          <label><input type="radio" name="nr01_atualizada" value="Sim" required> Sim</label>
-          <label><input type="radio" name="nr01_atualizada" value="Não"> Não</label>
-        </div>
-      </div>
+    <label for="Email">E-mail:</label>
+    <input type="email" name="Email" id="Email" required />
 
-      <!-- Pergunta 3 -->
-      <div>
-        <label class="font-semibold">3. Sua empresa informou sobre as mudanças na NR-01?</label>
-        <div class="mt-2 space-x-4">
-          <label><input type="radio" name="empresa_informou" value="Sim" required> Sim</label>
-          <label><input type="radio" name="empresa_informou" value="Não"> Não</label>
-        </div>
-      </div>
+    <label for="NomeCompleto">Qual o seu nome completo?</label>
+    <input type="text" name="NomeCompleto" id="NomeCompleto" required />
 
-      <!-- Pergunta 4 -->
-      <div>
-        <label class="font-semibold">4. Houve algum treinamento específico sobre a nova NR-01?</label>
-        <div class="mt-2 space-x-4">
-          <label><input type="radio" name="treinamento" value="Sim" required> Sim</label>
-          <label><input type="radio" name="treinamento" value="Não"> Não</label>
-        </div>
-      </div>
+    <label for="Empresa">Qual o nome da empresa que você trabalha?</label>
+    <input type="text" name="Empresa" id="Empresa" required />
 
-      <!-- Pergunta 5 -->
-      <div>
-        <label class="font-semibold">5. Você recebeu materiais explicativos (cartilhas, vídeos etc)?</label>
-        <div class="mt-2 space-x-4">
-          <label><input type="radio" name="materiais" value="Sim" required> Sim</label>
-          <label><input type="radio" name="materiais" value="Não"> Não</label>
-        </div>
-      </div>
+    <label for="Funcao">Qual a sua função?</label>
+    <input type="text" name="Funcao" id="Funcao" required />
 
-      <button type="submit" class="mt-8 bg-green-600 text-white font-bold py-2 px-4 rounded-xl hover:bg-green-700">
-        Enviar Respostas
-      </button>
-    </form>
-  </div>
+    <!-- Perguntas -->
+
+    <label for="P1">1. Você tem que realizar atividades que não fazem parte da sua função?</label>
+    <select name="P1" id="P1" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P2">2. Sente-se tenso(a) no ambiente de trabalho?</label>
+    <select name="P2" id="P2" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P3">3. A função que você exerce exige um ritmo de trabalho intenso?</label>
+    <select name="P3" id="P3" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P4">4. É claro para você como deve executar seu serviço?</label>
+    <select name="P4" id="P4" required>
+      <option>Não.</option>
+      <option>Sim.</option>
+      <option>Um pouco.</option>
+      <option>As vezes.</option>
+      <option>Raramente.</option>
+    </select>
+
+    <label for="P5">5. Seu trabalho exige novas ideias?</label>
+    <select name="P5" id="P5" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P6">6. Você tem que lidar com diversas demandas ao mesmo tempo em sua rotina de trabalho?</label>
+    <select name="P6" id="P6" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente</option>
+      <option>Muito frequentemente / Sempre</option>
+    </select>
+
+    <label for="P7">7. Seu trabalho exige que você saiba lidar com situações de tensão?</label>
+    <select name="P7" id="P7" required>
+      <option>Não.</option>
+      <option>Sim.</option>
+      <option>Um pouco.</option>
+      <option>As vezes.</option>
+      <option>Raramente.</option>
+    </select>
+
+    <label for="P8">8. A empresa é justa no tratamento de seus colaboradores?</label>
+    <select name="P8" id="P8" required>
+      <option>Não.</option>
+      <option>Sim.</option>
+      <option>Um pouco.</option>
+      <option>As vezes.</option>
+      <option>Raramente.</option>
+    </select>
+
+    <label for="P9">9. Você discorda de algumas funções que lhe são atribuídas?</label>
+    <select name="P9" id="P9" required>
+      <option>Discordo completamente.</option>
+      <option>Discordo um pouco.</option>
+      <option>Nem concordo, nem discordo.</option>
+      <option>Concordo muito.</option>
+      <option>Concordo totalmente.</option>
+    </select>
+
+    <label for="P10">10. Você tem que realizar atividades que considera moralmente erradas?</label>
+    <select name="P10" id="P10" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P11">11. Você se sente inseguro(a) na sua habilidade de realizar tarefas?</label>
+    <select name="P11" id="P11" required>
+      <option>Quase nunca / Nunca</option>
+      <option>Poucas vezes</option>
+      <option>Algumas vezes</option>
+      <option>Frequentemente</option>
+      <option>Muito frequentemente / Sempre</option>
+    </select>
+
+    <label for="P12">12. Você se sente mentalmente exausto(a) no trabalho?</label>
+    <select name="P12" id="P12" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P13">13. Você pode realizar seu trabalho sem pressa para entrega do serviço?</label>
+    <select name="P13" id="P13" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P14">14. Você se sente reconhecido(a) por parte da gerência pelo trabalho desempenhado?</label>
+    <select name="P14" id="P14" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P15">15. Você se sente tenso(a) durante sua atividade?</label>
+    <select name="P15" id="P15" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P16">16. Você recebe comentários sexuais durante seu trabalho que te incomodam?</label>
+    <select name="P16" id="P16" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P17">17. Você se sente sobrecarregado(a) com a quantidade de tarefas que precisa executar?</label>
+    <select name="P17" id="P17" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P18">18. Você sofre desrespeito em seu ambiente de trabalho?</label>
+    <select name="P18" id="P18" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P19">19. Você sente dificuldade para se concentrar?</label>
+    <select name="P19" id="P19" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P20">20. Você pode delimitar/controlar a quantidade de tarefas que será exercida?</label>
+    <select name="P20" id="P20" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P21">21. No trabalho, você deve tomar decisões arriscadas?</label>
+    <select name="P21" id="P21" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P22">22. A distribuição de tarefas entre os colaboradores é justa?</label>
+    <select name="P22" id="P22" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P23">23. A empresa tem respeito pelo bem-estar de seus colaboradores?</label>
+    <select name="P23" id="P23" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P24">24. Seu trabalho exige prazos curtos para entrega de serviço?</label>
+    <select name="P24" id="P24" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P25">25. Já recebeu ofensas no seu ambiente de trabalho de colegas ou líderes?</label>
+    <select name="P25" id="P25" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P26">26. Você se sente descansado(a) ao acordar?</label>
+    <select name="P26" id="P26" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P27">27. No ambiente de trabalho, você já foi exposto publicamente com informações que deveriam ser confidenciais?</label>
+    <select name="P27" id="P27" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P28">28. Há algum colega de trabalho que é agressivo na maneira de falar e tratar você?</label>
+    <select name="P28" id="P28" required>
+      <option>Não.</option>
+      <option>Sim.</option>
+    </select>
+
+    <label for="P29">29. No trabalho, você recebe comentários desagradáveis por causa da sua cor de pele, orientação sexual ou religiosa?</label>
+    <select name="P29" id="P29" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P30">30. Você precisa esconder as suas emoções em seu local de trabalho?</label>
+    <select name="P30" id="P30" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P31">31. Sua empresa incentiva seu desenvolvimento no trabalho?</label>
+    <select name="P31" id="P31" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P32">32. Os conflitos entre colaboradores são resolvidos de maneira justa?</label>
+    <select name="P32" id="P32" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P33">33. Você se sente irritado no seu ambiente de trabalho?</label>
+    <select name="P33" id="P33" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P34">34. Você se sente fracassado(a) no ambiente de trabalho?</label>
+    <select name="P34" id="P34" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P35">35. Você pode confiar nos seus colegas de trabalho?</label>
+    <select name="P35" id="P35" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P36">36. Você pode contar com seus colegas quando está com uma situação difícil no trabalho?</label>
+    <select name="P36" id="P36" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P37">37. Você se sente preocupado(a) referente ao trabalho?</label>
+    <select name="P37" id="P37" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P38">38. Você é excluído(a) de grupos, conversas ou reuniões de trabalho nas quais acha que deveria participar?</label>
+    <select name="P38" id="P38" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente.</option>
+    </select>
+
+    <label for="P39">39. Você se sente ansioso(a) no ambiente de trabalho?</label>
+    <select name="P39" id="P39" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente.</option>
+    </select>
+
+    <label for="P40">40. Você se sente triste no seu ambiente de trabalho?</label>
+    <select name="P40" id="P40" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente.</option>
+    </select>
+
+    <label for="P41">41. Você se sente pressionado(a) no seu ambiente de trabalho?</label>
+    <select name="P41" id="P41" required>
+      <option>Quase nunca / Nunca</option>
+      <option>Poucas vezes</option>
+      <option>Algumas vezes</option>
+      <option>Frequentemente</option>
+      <option>Muito frequentemente / Sempre</option>
+    </select>
+
+    <label for="P42">42. Você possui apoio do seu líder?</label>
+    <select name="P42" id="P42" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P43">43. Voce se sente tratado(a) de forma justa e respeitosa por parte da liderança?</label>
+    <select name="P43" id="P43" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P44">44. Seu trabalho te faz se sentir bem consigo mesmo?</label>
+    <select name="P44" id="P44" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P45">45. Você se sente motivado com o trabalho que realiza?</label>
+    <select name="P45" id="P45" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P46">46. Você se sente bem na sua profissão?</label>
+    <select name="P46" id="P46" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P47">47. Tem prazer em realizar suas tarefas diárias no trabalho?</label>
+    <select name="P47" id="P47" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P48">48. Você se sente entusiasmado no seu trabalho?</label>
+    <select name="P48" id="P48" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P49">49. Com que frequência você tem se sentido triste, sem esperança ou com pouca energia para realizar suas atividades diárias?</label>
+    <select name="P49" id="P49" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <label for="P50">50. Nos últimos meses, você tem se sentido frequentemente desmotivado(a) ou com dificuldade de encontrar prazer em atividades que antes gostava?</label>
+    <select name="P50" id="P50" required>
+      <option>Não.</option>
+      <option>Sim.</option>
+      <option>Um pouco.</option>
+      <option>Algumas vezes</option>
+      <option>Raramente.</option>
+    </select>
+
+    <label for="P51">51. Em algum momento, você recebeu comentários, gestos ou abordagens de cunho sexual no ambiente de trabalho que te deixaram desconfortável?</label>
+    <select name="P51" id="P51" required>
+      <option>Quase nunca / Nunca.</option>
+      <option>Poucas vezes.</option>
+      <option>Algumas vezes.</option>
+      <option>Frequentemente.</option>
+      <option>Muito frequentemente / Sempre.</option>
+    </select>
+
+    <button type="submit">Enviar</button>
+  </form>
 </body>
 </html>
