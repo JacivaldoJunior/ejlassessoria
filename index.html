@@ -221,17 +221,15 @@
     });
   </script>
 
-  <!-- Botão flutuante WhatsApp com Font Awesome -->
-  <a
-  href="https://wa.me/5522997985767"
-  target="_blank"
-  class="whatsapp-btn flex items-center gap-2 px-4"
-  style="width: auto; height: auto; border-radius: 9999px;"
-  aria-label="WhatsApp"
->
+<!-- Botão flutuante do WhatsApp com número oculto inicialmente -->
+<div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out overflow-hidden" 
+     style="width: 56px; height: 56px; border-radius: 9999px;">
   <i class="fab fa-whatsapp text-xl"></i>
-  <span class="font-semibold text-white text-sm">(22) 99798-5767</span>
-</a>
+  <span id="whatsappText" class="whitespace-nowrap text-white text-sm font-semibold hidden">
+    (22) 99798-5767
+  </span>
+</div>
+
 
 </body>
 </html>
