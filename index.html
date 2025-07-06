@@ -230,22 +230,23 @@
   </span>
 </div>
 
-  <script>
+<script>
   const whatsappBtn = document.getElementById("whatsappToggle");
   const whatsappText = document.getElementById("whatsappText");
+  let clickedOnce = false;
 
   whatsappBtn.addEventListener("click", () => {
-    // Redireciona para o WhatsApp
-    window.open("https://wa.me/5522997985767", "_blank");
-
-    // Mostra o número (expande visualmente)
-    whatsappText.classList.remove("hidden");
-
-    // Altera o tamanho do botão para caber o texto
-    whatsappBtn.style.width = "auto";
-    whatsappBtn.style.paddingRight = "16px";
+    if (!clickedOnce) {
+      whatsappText.classList.remove("hidden");
+      whatsappBtn.style.width = "auto";
+      whatsappBtn.style.paddingRight = "16px";
+      clickedOnce = true;
+    } else {
+      window.open("https://wa.me/5522997985767", "_blank");
+    }
   });
 </script>
+
 
 
 </body>
