@@ -15,7 +15,6 @@
   <style>
     .hidden { display: none; }
 
-    /* Estilo para botão flutuante WhatsApp usando Font Awesome */
     .whatsapp-btn {
       position: fixed;
       bottom: 24px;
@@ -47,7 +46,6 @@
     <p>
       Sua empresa já está pronta para as mudanças na NR-1 em relação aos riscos psicossociais?
     </p>
-    
   </section>
 
   <!-- Cabeçalho -->
@@ -56,11 +54,9 @@
       <div class="flex items-center space-x-2">
         <div class="text-green-600 font-bold text-lg">EJL Assessoria em Segurança do Trabalho</div>
       </div>
-
       <nav class="hidden md:flex items-center space-x-4">
         <button class="text-green-700 font-medium hover:text-green-900 transition">Para empresas</button>
         <div class="flex items-center gap-3">
-          </button>
           <button id="btnLogin" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
             Pesquisa NR-01
           </button>
@@ -73,7 +69,6 @@
   <section class="bg-green-100 py-20 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/2">
-        <!-- Imagem local na mesma pasta -->
         <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-lg shadow-md w-full" />
       </div>
       <div class="md:w-1/2 text-center md:text-left">
@@ -161,20 +156,18 @@
     </div>
   </section>
 
-  <!-- NOVA SEÇÃO COM SUA IMAGEM LOCAL -->
+  <!-- Nova Seção -->
   <section class="bg-white py-20 px-4">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-10">
         Conheça nosso programa de saúde <br class="hidden md:block" />
         emocional para empresas
       </h2>
-
       <img
         src="minha-imagem.png"
         alt="Imagem de saúde emocional"
         class="mx-auto max-w-md w-full rounded-lg shadow"
       />
-
       <p class="mt-6 text-gray-700 max-w-2xl mx-auto">
         Nosso programa oferece acompanhamento psicológico com base em dados e conexões entre colaboradores, promovendo uma cultura de bem-estar contínuo.
       </p>
@@ -186,28 +179,18 @@
     © 2025 EJL Assessoria. Todos os direitos reservados.
   </footer>
 
+  <!-- Scripts -->
   <script>
-    const btnCadastro = document.getElementById('btnCadastro');
     const btnLogin = document.getElementById('btnLogin');
-    const formCadastro = document.getElementById('formCadastro');
-    const formLogin = document.getElementById('formLogin');
-
-    btnCadastro.addEventListener('click', () => {
-      if (formCadastro) formCadastro.classList.remove('hidden');
-      if (formLogin) formLogin.classList.add('hidden');
-      if (formCadastro) formCadastro.scrollIntoView({ behavior: 'smooth' });
-    });
 
     btnLogin.addEventListener('click', () => {
-      // Redireciona para a página do formulário NR-01
       window.location.href = 'formulario.html';
     });
 
-    // Validação simples para formulário "Quero saber mais"
     document.querySelector("form[action*='formspree.io']").addEventListener("submit", function (e) {
       const nome = this.querySelector('input[name="nome"]').value.trim();
       const email = this.querySelector('input[name="email"]').value.trim();
-      const tel = this.querySelector('input[name="telefone]').value.trim();
+      const tel = this.querySelector('input[name="telefone"]').value.trim();
 
       if (!nome || !email || !tel) {
         e.preventDefault();
@@ -217,35 +200,31 @@
         alert("E-mail inválido.");
       }
     });
+
+    const whatsappBtn = document.getElementById("whatsappToggle");
+    const whatsappText = document.getElementById("whatsappText");
+    let clickedOnce = false;
+
+    whatsappBtn.addEventListener("click", () => {
+      if (!clickedOnce) {
+        whatsappText.classList.remove("hidden");
+        whatsappBtn.style.width = "auto";
+        whatsappBtn.style.paddingRight = "16px";
+        clickedOnce = true;
+      } else {
+        window.open("https://wa.me/5522997985767", "_blank");
+      }
+    });
   </script>
 
-<!-- Botão flutuante do WhatsApp com número oculto inicialmente -->
-<div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out overflow-hidden" 
-     style="width: 56px; height: 56px; border-radius: 9999px;">
-  <i class="fab fa-whatsapp text-xl"></i>
-  <span id="whatsappText" class="whitespace-nowrap text-white text-sm font-semibold hidden">
-    (22) 99798-5767
-  </span>
-</div>
-
-<script>
-  const whatsappBtn = document.getElementById("whatsappToggle");
-  const whatsappText = document.getElementById("whatsappText");
-  let clickedOnce = false;
-
-  whatsappBtn.addEventListener("click", () => {
-    if (!clickedOnce) {
-      whatsappText.classList.remove("hidden");
-      whatsappBtn.style.width = "auto";
-      whatsappBtn.style.paddingRight = "16px";
-      clickedOnce = true;
-    } else {
-      window.open("https://wa.me/5522997985767", "_blank");
-    }
-  });
-</script>
-
-
+  <!-- Botão flutuante WhatsApp -->
+  <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out overflow-hidden" 
+      style="width: 56px; height: 56px; border-radius: 9999px;">
+    <i class="fab fa-whatsapp text-xl"></i>
+    <span id="whatsappText" class="whitespace-nowrap text-white text-sm font-semibold hidden">
+      (22) 99798-5767
+    </span>
+  </div>
 
 </body>
 </html>
