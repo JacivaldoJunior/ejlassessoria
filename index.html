@@ -201,7 +201,14 @@
       }
     });
 
-     <script>
+     <!-- Botão flutuante do WhatsApp -->
+  <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out" 
+       style="width: 56px; height: 56px; border-radius: 9999px;">
+    <i class="fab fa-whatsapp text-xl"></i>
+    <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+  </div>
+
+  <script>
     const whatsappBtn = document.getElementById("whatsappToggle");
     const whatsappText = document.getElementById("whatsappText");
     let clickedOnce = false;
@@ -217,6 +224,7 @@
       }
     });
   </script>
+
 
 
 </body>
