@@ -6,15 +6,11 @@
   <title>EJL Assessoria em Segurança do Trabalho</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Adicionando CDN do Font Awesome -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-  />
+  <!-- CDN Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
   <style>
-    .hidden { display: none; }
-
+    /* Botão flutuante WhatsApp */
     .whatsapp-btn {
       position: fixed;
       bottom: 24px;
@@ -33,9 +29,19 @@
       font-size: 28px;
       text-decoration: none;
       z-index: 9999;
+      overflow: hidden;
+      padding-right: 0;
     }
     .whatsapp-btn:hover {
       background-color: #128c7e;
+    }
+    .whatsapp-text {
+      white-space: nowrap;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem; /* text-sm */
+      margin-left: 8px;
+      display: none;
     }
   </style>
 </head>
@@ -54,9 +60,11 @@
       <div class="flex items-center space-x-2">
         <div class="text-green-600 font-bold text-lg">EJL Assessoria em Segurança do Trabalho</div>
       </div>
+
       <nav class="hidden md:flex items-center space-x-4">
         <button class="text-green-700 font-medium hover:text-green-900 transition">Para empresas</button>
         <div class="flex items-center gap-3">
+          </button>
           <button id="btnLogin" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
             Pesquisa NR-01
           </button>
@@ -65,10 +73,11 @@
     </div>
   </header>
 
-  <!-- Seção NR-01 Ilustrativa -->
+ <!-- Seção NR-01 Ilustrativa -->
   <section class="bg-green-100 py-20 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/2">
+        <!-- Imagem local na mesma pasta -->
         <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-lg shadow-md w-full" />
       </div>
       <div class="md:w-1/2 text-center md:text-left">
@@ -78,130 +87,7 @@
     </div>
   </section>
 
-  <!-- Seção: Cuidado Integrado -->
-  <section class="bg-white py-16 px-4">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">
-          Cuidado integrado de saúde mental
-        </h2>
-        <p class="text-green-700 mb-6">
-          Um programa de saúde emocional focado em resultados mensuráveis.  
-          Promova o crescimento pessoal e o desempenho na sua empresa.
-        </p>
-        <button class="bg-green-600 text-white px-6 py-3 rounded font-semibold hover:bg-green-700 transition">
-          Quero cuidar da minha empresa
-        </button>
-      </div>
-      <div>
-        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"
-             alt="Profissional negra sorrindo"
-             class="rounded-lg shadow-md w-full"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Banner principal com formulário -->
-  <section class="text-center py-16 px-4">
-    <p class="text-lg mb-8 max-w-2xl mx-auto">Ofereça acompanhamento psicológico e suporte completo para colaboradores. Reduza afastamentos e aumente a produtividade.</p>
-    <img src="https://images.unsplash.com/photo-1556228720-66c9e9f5a0f9?auto=format&fit=crop&w=800&q=80" alt="Psicóloga atendendo" class="mx-auto rounded-lg shadow-md w-full max-w-xl mb-8" />
-    <form action="https://formspree.io/f/xknlpqyr" method="POST" class="bg-white max-w-xl mx-auto shadow-md rounded-lg p-6 grid gap-4">
-      <input type="text" name="nome" placeholder="Nome" class="border p-3 rounded w-full" />
-      <input type="email" name="email" placeholder="E-mail corporativo" class="border p-3 rounded w-full" />
-      <input type="tel" name="telefone" placeholder="Telefone" class="border p-3 rounded w-full" />
-      <button class="bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition">Quero saber mais</button>
-    </form>
-  </section>
-
-  <!-- Benefícios -->
-  <section class="bg-green-100 py-12">
-    <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-3 gap-6 text-center">
-      <div>
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Colaboradores felizes" class="w-full h-48 object-cover rounded mb-4" />
-        <h3 class="text-xl font-bold mb-2 text-green-800">+Engajamento</h3>
-        <p>Colaboradores mais motivados e produtivos.</p>
-      </div>
-      <div>
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Equipe em reunião" class="w-full h-48 object-cover rounded mb-4" />
-        <h3 class="text-xl font-bold mb-2 text-green-800">Redução de Afastamentos</h3>
-        <p>Menos licenças e absenteísmo.</p>
-      </div>
-      <div>
-        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80" alt="Ambiente de trabalho saudável" class="w-full h-48 object-cover rounded mb-4" />
-        <h3 class="text-xl font-bold mb-2 text-green-800">Clima Organizacional</h3>
-        <p>Ambiente de trabalho mais saudável e colaborativo.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="bg-gray-100 py-16">
-    <div class="max-w-4xl mx-auto px-4">
-      <h3 class="text-3xl font-bold text-center mb-10 text-green-800">Perguntas Frequentes</h3>
-      <div class="space-y-4">
-        <details class="bg-white p-4 rounded shadow">
-          <summary class="font-semibold cursor-pointer">Como funciona o programa de acompanhamento psicológico?</summary>
-          <p class="mt-2">Oferecemos sessões com psicólogos certificados, acompanhamento por aplicativo e relatórios mensais para RH.</p>
-        </details>
-        <details class="bg-white p-4 rounded shadow">
-          <summary class="font-semibold cursor-pointer">Qual o custo por colaborador?</summary>
-          <p class="mt-2">O valor varia conforme o plano contratado. Solicite um orçamento personalizado através do formulário.</p>
-        </details>
-        <details class="bg-white p-4 rounded shadow">
-          <summary class="font-semibold cursor-pointer">Como faço para contratar?</summary>
-          <p class="mt-2">Basta preencher o formulário no início da página ou entrar em contato via WhatsApp.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Nova Seção -->
-  <section class="bg-white py-20 px-4">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-10">
-        Conheça nosso programa de saúde <br class="hidden md:block" />
-        emocional para empresas
-      </h2>
-      <img
-        src="minha-imagem.png"
-        alt="Imagem de saúde emocional"
-        class="mx-auto max-w-md w-full rounded-lg shadow"
-      />
-      <p class="mt-6 text-gray-700 max-w-2xl mx-auto">
-        Nosso programa oferece acompanhamento psicológico com base em dados e conexões entre colaboradores, promovendo uma cultura de bem-estar contínuo.
-      </p>
-    </div>
-  </section>
-
-  <!-- Rodapé -->
-  <footer class="text-center py-6 text-sm text-gray-500">
-    © 2025 EJL Assessoria. Todos os direitos reservados.
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    const btnLogin = document.getElementById('btnLogin');
-
-    btnLogin.addEventListener('click', () => {
-      window.location.href = 'formulario.html';
-    });
-
-    document.querySelector("form[action*='formspree.io']").addEventListener("submit", function (e) {
-      const nome = this.querySelector('input[name="nome"]').value.trim();
-      const email = this.querySelector('input[name="email"]').value.trim();
-      const tel = this.querySelector('input[name="telefone"]').value.trim();
-
-      if (!nome || !email || !tel) {
-        e.preventDefault();
-        alert("Por favor, preencha todos os campos.");
-      } else if (!email.includes("@")) {
-        e.preventDefault();
-        alert("E-mail inválido.");
-      }
-    });
-
-     <!-- Botão flutuante do WhatsApp -->
+  <!-- Botão flutuante do WhatsApp -->
   <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out" 
        style="width: 56px; height: 56px; border-radius: 9999px;">
     <i class="fab fa-whatsapp text-xl"></i>
@@ -225,7 +111,19 @@
     });
   </script>
 
+  <script>
+    const btnCadastro = document.getElementById('btnCadastro');
+    const btnLogin = document.getElementById('btnLogin');
 
+    btnCadastro.addEventListener('click', () => {
+      alert("Função Criar conta ainda não implementada.");
+    });
+
+    btnLogin.addEventListener('click', () => {
+      alert("Função Entrar ainda não implementada.");
+    });
+  </script>
 
 </body>
 </html>
+
