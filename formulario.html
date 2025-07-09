@@ -4,39 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pesquisa NR-01 - EJL Assessoria</title>
-  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-8 text-center">Formulário de Pesquisa NR-01</h1>
-    <form action="https://formspree.io/f/SEU_ENDPOINT" method="POST" class="space-y-6">
+<body class="bg-green-50 min-h-screen flex items-center justify-center p-6">
+  <div class="bg-white shadow-lg rounded-lg max-w-5xl w-full p-10">
+    <h1 class="text-4xl font-extrabold text-green-800 mb-10 text-center tracking-wide">
+      Formulário de Pesquisa NR-01
+    </h1>
+    <form action="https://formspree.io/f/SEU_ENDPOINT" method="POST" class="space-y-8 text-green-900 font-medium">
 
-      <!-- Dados iniciais -->
+      <!-- Dados pessoais -->
       <div>
-        <label class="block font-semibold mb-1" for="email">E-mail *</label>
-        <input type="email" id="email" name="email" required class="w-full p-2 border rounded" />
+        <label for="email" class="block mb-2 text-lg font-semibold">E-mail <span class="text-red-600">*</span></label>
+        <input type="email" id="email" name="email" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 placeholder-green-400 transition" placeholder="Digite seu e-mail" />
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="nome_completo">Qual o seu nome completo? *</label>
-        <input type="text" id="nome_completo" name="nome_completo" required class="w-full p-2 border rounded" />
+        <label for="nome_completo" class="block mb-2 text-lg font-semibold">Qual o seu nome completo? <span class="text-red-600">*</span></label>
+        <input type="text" id="nome_completo" name="nome_completo" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 placeholder-green-400 transition" placeholder="Digite seu nome completo" />
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="empresa">Qual o nome da empresa que você trabalha? *</label>
-        <input type="text" id="empresa" name="empresa" required class="w-full p-2 border rounded" />
+        <label for="empresa" class="block mb-2 text-lg font-semibold">Qual o nome da empresa que você trabalha? <span class="text-red-600">*</span></label>
+        <input type="text" id="empresa" name="empresa" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 placeholder-green-400 transition" placeholder="Digite o nome da empresa" />
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="funcao">Qual a sua função? *</label>
-        <input type="text" id="funcao" name="funcao" required class="w-full p-2 border rounded" />
+        <label for="funcao" class="block mb-2 text-lg font-semibold">Qual a sua função? <span class="text-red-600">*</span></label>
+        <input type="text" id="funcao" name="funcao" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 placeholder-green-400 transition" placeholder="Digite sua função" />
       </div>
 
-      <!-- Perguntas 1 a 51 -->
-
+      <!-- Perguntas -->
       <div>
-        <label class="block font-semibold mb-1" for="p1">1. Você tem que realizar atividades que não fazem parte da sua função? *</label>
-        <select id="p1" name="p1" required class="w-full p-2 border rounded">
+        <label for="p1" class="block mb-2 text-lg font-semibold">1. Você tem que realizar atividades que não fazem parte da sua função? <span class="text-red-600">*</span></label>
+        <select id="p1" name="p1" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -46,8 +52,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p2">2. Sente-se tenso(a) no ambiente de trabalho? *</label>
-        <select id="p2" name="p2" required class="w-full p-2 border rounded">
+        <label for="p2" class="block mb-2 text-lg font-semibold">2. Sente-se tenso(a) no ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p2" name="p2" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -57,8 +64,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p3">3. A função que você exerce exige um ritmo de trabalho intenso? *</label>
-        <select id="p3" name="p3" required class="w-full p-2 border rounded">
+        <label for="p3" class="block mb-2 text-lg font-semibold">3. A função que você exerce exige um ritmo de trabalho intenso? <span class="text-red-600">*</span></label>
+        <select id="p3" name="p3" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -68,8 +76,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p4">4. É claro para você como deve executar seu serviço? *</label>
-        <select id="p4" name="p4" required class="w-full p-2 border rounded">
+        <label for="p4" class="block mb-2 text-lg font-semibold">4. É claro para você como deve executar seu serviço? <span class="text-red-600">*</span></label>
+        <select id="p4" name="p4" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Não.</option>
           <option>Sim.</option>
           <option>Um pouco.</option>
@@ -79,8 +88,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p5">5. Seu trabalho exige novas ideias? *</label>
-        <select id="p5" name="p5" required class="w-full p-2 border rounded">
+        <label for="p5" class="block mb-2 text-lg font-semibold">5. Seu trabalho exige novas ideias? <span class="text-red-600">*</span></label>
+        <select id="p5" name="p5" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -90,8 +100,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p6">6. Você tem que lidar com diversas demandas ao mesmo tempo em sua rotina de trabalho? *</label>
-        <select id="p6" name="p6" required class="w-full p-2 border rounded">
+        <label for="p6" class="block mb-2 text-lg font-semibold">6. Você tem que lidar com diversas demandas ao mesmo tempo em sua rotina de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p6" name="p6" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -101,8 +112,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p7">7. Seu trabalho exige que você saiba lidar com situações de tensão? *</label>
-        <select id="p7" name="p7" required class="w-full p-2 border rounded">
+        <label for="p7" class="block mb-2 text-lg font-semibold">7. Seu trabalho exige que você saiba lidar com situações de tensão? <span class="text-red-600">*</span></label>
+        <select id="p7" name="p7" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Não.</option>
           <option>Sim.</option>
           <option>Um pouco.</option>
@@ -112,8 +124,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p8">8. A empresa é justa no tratamento de seus colaboradores? *</label>
-        <select id="p8" name="p8" required class="w-full p-2 border rounded">
+        <label for="p8" class="block mb-2 text-lg font-semibold">8. A empresa é justa no tratamento de seus colaboradores? <span class="text-red-600">*</span></label>
+        <select id="p8" name="p8" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Não.</option>
           <option>Sim.</option>
           <option>Um pouco.</option>
@@ -123,8 +136,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p9">9. Você discorda de algumas funções que lhe são atribuídas? *</label>
-        <select id="p9" name="p9" required class="w-full p-2 border rounded">
+        <label for="p9" class="block mb-2 text-lg font-semibold">9. Você discorda de algumas funções que lhe são atribuídas? <span class="text-red-600">*</span></label>
+        <select id="p9" name="p9" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Discordo completamente.</option>
           <option>Discordo um pouco.</option>
           <option>Nem concordo, nem discordo.</option>
@@ -134,8 +148,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p10">10. Você tem que realizar atividades que considera moralmente erradas? *</label>
-        <select id="p10" name="p10" required class="w-full p-2 border rounded">
+        <label for="p10" class="block mb-2 text-lg font-semibold">10. Você tem que realizar atividades que considera moralmente erradas? <span class="text-red-600">*</span></label>
+        <select id="p10" name="p10" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -145,8 +160,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p11">11. Você se sente inseguro(a) na sua habilidade de realizar tarefas? *</label>
-        <select id="p11" name="p11" required class="w-full p-2 border rounded">
+        <label for="p11" class="block mb-2 text-lg font-semibold">11. Você se sente inseguro(a) na sua habilidade de realizar tarefas? <span class="text-red-600">*</span></label>
+        <select id="p11" name="p11" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca</option>
           <option>Poucas vezes</option>
           <option>Algumas vezes</option>
@@ -156,8 +172,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p12">12. Você se sente mentalmente exausto(a) no trabalho? *</label>
-        <select id="p12" name="p12" required class="w-full p-2 border rounded">
+        <label for="p12" class="block mb-2 text-lg font-semibold">12. Você se sente mentalmente exausto(a) no trabalho? <span class="text-red-600">*</span></label>
+        <select id="p12" name="p12" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -167,8 +184,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p13">13. Você pode realizar seu trabalho sem pressa para entrega do serviço? *</label>
-        <select id="p13" name="p13" required class="w-full p-2 border rounded">
+        <label for="p13" class="block mb-2 text-lg font-semibold">13. Você pode realizar seu trabalho sem pressa para entrega do serviço? <span class="text-red-600">*</span></label>
+        <select id="p13" name="p13" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -178,8 +196,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p14">14. Você se sente reconhecido(a) por parte da gerência pelo trabalho desempenhado? *</label>
-        <select id="p14" name="p14" required class="w-full p-2 border rounded">
+        <label for="p14" class="block mb-2 text-lg font-semibold">14. Você se sente reconhecido(a) por parte da gerência pelo trabalho desempenhado? <span class="text-red-600">*</span></label>
+        <select id="p14" name="p14" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -189,8 +208,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p15">15. Você se sente tenso(a) durante sua atividade? *</label>
-        <select id="p15" name="p15" required class="w-full p-2 border rounded">
+        <label for="p15" class="block mb-2 text-lg font-semibold">15. Você se sente tenso(a) durante sua atividade? <span class="text-red-600">*</span></label>
+        <select id="p15" name="p15" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -200,8 +220,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p16">16. Você recebe comentários sexuais durante seu trabalho que te incomodam? *</label>
-        <select id="p16" name="p16" required class="w-full p-2 border rounded">
+        <label for="p16" class="block mb-2 text-lg font-semibold">16. Você recebe comentários sexuais durante seu trabalho que te incomodam? <span class="text-red-600">*</span></label>
+        <select id="p16" name="p16" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -211,8 +232,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p17">17. Você se sente sobrecarregado(a) com a quantidade de tarefas que precisa executar? *</label>
-        <select id="p17" name="p17" required class="w-full p-2 border rounded">
+        <label for="p17" class="block mb-2 text-lg font-semibold">17. Você se sente sobrecarregado(a) com a quantidade de tarefas que precisa executar? <span class="text-red-600">*</span></label>
+        <select id="p17" name="p17" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -222,8 +244,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p18">18. Você sofre desrespeito em seu ambiente de trabalho? *</label>
-        <select id="p18" name="p18" required class="w-full p-2 border rounded">
+        <label for="p18" class="block mb-2 text-lg font-semibold">18. Você sofre desrespeito em seu ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p18" name="p18" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -233,8 +256,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p19">19. Você sente dificuldade para se concentrar? *</label>
-        <select id="p19" name="p19" required class="w-full p-2 border rounded">
+        <label for="p19" class="block mb-2 text-lg font-semibold">19. Você sente dificuldade para se concentrar? <span class="text-red-600">*</span></label>
+        <select id="p19" name="p19" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -244,8 +268,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p20">20. Voce pode delimitar/controlar a quantidade de tarefas que será exercida? *</label>
-        <select id="p20" name="p20" required class="w-full p-2 border rounded">
+        <label for="p20" class="block mb-2 text-lg font-semibold">20. Você pode delimitar/controlar a quantidade de tarefas que será exercida? <span class="text-red-600">*</span></label>
+        <select id="p20" name="p20" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -255,8 +280,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p21">21. No trabalho, você deve tomar decisões arriscadas? *</label>
-        <select id="p21" name="p21" required class="w-full p-2 border rounded">
+        <label for="p21" class="block mb-2 text-lg font-semibold">21. No trabalho, você deve tomar decisões arriscadas? <span class="text-red-600">*</span></label>
+        <select id="p21" name="p21" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -266,8 +292,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p22">22. A distribuição de tarefas entre os colaboradores é justa? *</label>
-        <select id="p22" name="p22" required class="w-full p-2 border rounded">
+        <label for="p22" class="block mb-2 text-lg font-semibold">22. A distribuição de tarefas entre os colaboradores é justa? <span class="text-red-600">*</span></label>
+        <select id="p22" name="p22" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -277,8 +304,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p23">23. A empresa tem respeito pelo bem-estar de seus colaboradores? *</label>
-        <select id="p23" name="p23" required class="w-full p-2 border rounded">
+        <label for="p23" class="block mb-2 text-lg font-semibold">23. A empresa tem respeito pelo bem-estar de seus colaboradores? <span class="text-red-600">*</span></label>
+        <select id="p23" name="p23" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -288,8 +316,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p24">24. Seu trabalho exige prazos curtos para entrega de serviço? *</label>
-        <select id="p24" name="p24" required class="w-full p-2 border rounded">
+        <label for="p24" class="block mb-2 text-lg font-semibold">24. Seu trabalho exige prazos curtos para entrega de serviço? <span class="text-red-600">*</span></label>
+        <select id="p24" name="p24" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -299,8 +328,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p25">25. Já recebeu ofensas no seu ambiente de trabalho de colegas ou líderes? *</label>
-        <select id="p25" name="p25" required class="w-full p-2 border rounded">
+        <label for="p25" class="block mb-2 text-lg font-semibold">25. Já recebeu ofensas no seu ambiente de trabalho de colegas ou líderes? <span class="text-red-600">*</span></label>
+        <select id="p25" name="p25" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -310,8 +340,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p26">26. Você se sente descansado(a) ao acordar? *</label>
-        <select id="p26" name="p26" required class="w-full p-2 border rounded">
+        <label for="p26" class="block mb-2 text-lg font-semibold">26. Você se sente descansado(a) ao acordar? <span class="text-red-600">*</span></label>
+        <select id="p26" name="p26" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -321,8 +352,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p27">27. No ambiente de trabalho, você já foi exposto publicamente com informações que deveriam ser confidenciais? *</label>
-        <select id="p27" name="p27" required class="w-full p-2 border rounded">
+        <label for="p27" class="block mb-2 text-lg font-semibold">27. No ambiente de trabalho, você já foi exposto publicamente com informações que deveriam ser confidenciais? <span class="text-red-600">*</span></label>
+        <select id="p27" name="p27" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -332,16 +364,18 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p28">28. Há algum colega de trabalho que é agressivo na maneira de falar e tratar você? *</label>
-        <select id="p28" name="p28" required class="w-full p-2 border rounded">
+        <label for="p28" class="block mb-2 text-lg font-semibold">28. Há algum colega de trabalho que é agressivo na maneira de falar e tratar você? <span class="text-red-600">*</span></label>
+        <select id="p28" name="p28" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Não.</option>
           <option>Sim.</option>
         </select>
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p29">29. No trabalho, você recebe comentários desagradáveis por causa da sua cor de pele, orientação sexual ou religiosa? *</label>
-        <select id="p29" name="p29" required class="w-full p-2 border rounded">
+        <label for="p29" class="block mb-2 text-lg font-semibold">29. No trabalho, você recebe comentários desagradáveis por causa da sua cor de pele, orientação sexual ou religiosa? <span class="text-red-600">*</span></label>
+        <select id="p29" name="p29" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -351,8 +385,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p30">30. Você precisa esconder as suas emoções em seu local de trabalho? *</label>
-        <select id="p30" name="p30" required class="w-full p-2 border rounded">
+        <label for="p30" class="block mb-2 text-lg font-semibold">30. Você precisa esconder as suas emoções em seu local de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p30" name="p30" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -362,8 +397,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p31">31. Sua empresa incentiva seu desenvolvimento no trabalho? *</label>
-        <select id="p31" name="p31" required class="w-full p-2 border rounded">
+        <label for="p31" class="block mb-2 text-lg font-semibold">31. Sua empresa incentiva seu desenvolvimento no trabalho? <span class="text-red-600">*</span></label>
+        <select id="p31" name="p31" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -373,8 +409,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p32">32. Os conflitos entre colaboradores são resolvidos de maneira justa? *</label>
-        <select id="p32" name="p32" required class="w-full p-2 border rounded">
+        <label for="p32" class="block mb-2 text-lg font-semibold">32. Os conflitos entre colaboradores são resolvidos de maneira justa? <span class="text-red-600">*</span></label>
+        <select id="p32" name="p32" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -384,8 +421,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p33">33. Você se sente irritado no seu ambiente de trabalho? *</label>
-        <select id="p33" name="p33" required class="w-full p-2 border rounded">
+        <label for="p33" class="block mb-2 text-lg font-semibold">33. Você se sente irritado no seu ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p33" name="p33" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -395,8 +433,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p34">34. Você se sente fracassado(a) no ambiente de trabalho? *</label>
-        <select id="p34" name="p34" required class="w-full p-2 border rounded">
+        <label for="p34" class="block mb-2 text-lg font-semibold">34. Você se sente fracassado(a) no ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p34" name="p34" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -406,8 +445,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p35">35. Você pode confiar nos seus colegas de trabalho? *</label>
-        <select id="p35" name="p35" required class="w-full p-2 border rounded">
+        <label for="p35" class="block mb-2 text-lg font-semibold">35. Você pode confiar nos seus colegas de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p35" name="p35" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -417,8 +457,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p36">36. Você pode contar com seus colegas quando está com uma situação difícil no trabalho? *</label>
-        <select id="p36" name="p36" required class="w-full p-2 border rounded">
+        <label for="p36" class="block mb-2 text-lg font-semibold">36. Você pode contar com seus colegas quando está com uma situação difícil no trabalho? <span class="text-red-600">*</span></label>
+        <select id="p36" name="p36" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -428,8 +469,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p37">37. Você se sente preocupado(a) referente ao trabalho? *</label>
-        <select id="p37" name="p37" required class="w-full p-2 border rounded">
+        <label for="p37" class="block mb-2 text-lg font-semibold">37. Você se sente preocupado(a) referente ao trabalho? <span class="text-red-600">*</span></label>
+        <select id="p37" name="p37" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -439,41 +481,45 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p38">38. Você é excluído(a) de grupos, conversas ou reuniões de trabalho nas quais acha que deveria participar? *</label>
-        <select id="p38" name="p38" required class="w-full p-2 border rounded">
+        <label for="p38" class="block mb-2 text-lg font-semibold">38. Você é excluído(a) de grupos, conversas ou reuniões de trabalho nas quais acha que deveria participar? <span class="text-red-600">*</span></label>
+        <select id="p38" name="p38" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
           <option>Frequentemente.</option>
-          <option>Muito frequentemente.</option>
+          <option>Muito frequentemente / Sempre.</option>
         </select>
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p39">39. Você se sente ansioso(a) no ambiente de trabalho? *</label>
-        <select id="p39" name="p39" required class="w-full p-2 border rounded">
+        <label for="p39" class="block mb-2 text-lg font-semibold">39. Você se sente ansioso(a) no ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p39" name="p39" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
           <option>Frequentemente.</option>
-          <option>Muito frequentemente.</option>
+          <option>Muito frequentemente / Sempre.</option>
         </select>
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p40">40. Você se sente triste no seu ambiente de trabalho? *</label>
-        <select id="p40" name="p40" required class="w-full p-2 border rounded">
+        <label for="p40" class="block mb-2 text-lg font-semibold">40. Você se sente triste no seu ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p40" name="p40" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
           <option>Frequentemente.</option>
-          <option>Muito frequentemente.</option>
+          <option>Muito frequentemente / Sempre.</option>
         </select>
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p41">41. Você se sente pressionado(a) no seu ambiente de trabalho? *</label>
-        <select id="p41" name="p41" required class="w-full p-2 border rounded">
+        <label for="p41" class="block mb-2 text-lg font-semibold">41. Você se sente pressionado(a) no seu ambiente de trabalho? <span class="text-red-600">*</span></label>
+        <select id="p41" name="p41" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -483,8 +529,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p42">42. Você possui apoio do seu líder? *</label>
-        <select id="p42" name="p42" required class="w-full p-2 border rounded">
+        <label for="p42" class="block mb-2 text-lg font-semibold">42. Você possui apoio do seu líder? <span class="text-red-600">*</span></label>
+        <select id="p42" name="p42" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -494,8 +541,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p43">43. Voce se sente tratado(a) de forma justa e respeitosa por parte da liderança? *</label>
-        <select id="p43" name="p43" required class="w-full p-2 border rounded">
+        <label for="p43" class="block mb-2 text-lg font-semibold">43. Você se sente tratado(a) de forma justa e respeitosa por parte da liderança? <span class="text-red-600">*</span></label>
+        <select id="p43" name="p43" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -505,8 +553,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p44">44. Seu trabalho te faz se sentir bem consigo mesmo? *</label>
-        <select id="p44" name="p44" required class="w-full p-2 border rounded">
+        <label for="p44" class="block mb-2 text-lg font-semibold">44. Seu trabalho te faz se sentir bem consigo mesmo? <span class="text-red-600">*</span></label>
+        <select id="p44" name="p44" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -516,8 +565,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p45">45. Você se sente motivado com o trabalho que realiza? *</label>
-        <select id="p45" name="p45" required class="w-full p-2 border rounded">
+        <label for="p45" class="block mb-2 text-lg font-semibold">45. Você se sente motivado com o trabalho que realiza? <span class="text-red-600">*</span></label>
+        <select id="p45" name="p45" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -527,8 +577,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p46">46. Você se sente bem na sua profissão? *</label>
-        <select id="p46" name="p46" required class="w-full p-2 border rounded">
+        <label for="p46" class="block mb-2 text-lg font-semibold">46. Você se sente bem na sua profissão? <span class="text-red-600">*</span></label>
+        <select id="p46" name="p46" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -538,8 +589,9 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p47">47. Tem prazer em realizar suas tarefas diárias no trabalho? *</label>
-        <select id="p47" name="p47" required class="w-full p-2 border rounded">
+        <label for="p47" class="block mb-2 text-lg font-semibold">47. Você sente orgulho da sua profissão? <span class="text-red-600">*</span></label>
+        <select id="p47" name="p47" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Quase nunca / Nunca.</option>
           <option>Poucas vezes.</option>
           <option>Algumas vezes.</option>
@@ -549,53 +601,49 @@
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p48">48. Você se sente entusiasmado no seu trabalho? *</label>
-        <select id="p48" name="p48" required class="w-full p-2 border rounded">
-          <option>Quase nunca / Nunca.</option>
-          <option>Poucas vezes.</option>
-          <option>Algumas vezes.</option>
-          <option>Frequentemente.</option>
-          <option>Muito frequentemente / Sempre.</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block font-semibold mb-1" for="p49">49. Com que frequência você tem se sentido triste, sem esperança ou com pouca energia para realizar suas atividades diárias? *</label>
-        <select id="p49" name="p49" required class="w-full p-2 border rounded">
-          <option>Quase nunca / Nunca.</option>
-          <option>Poucas vezes.</option>
-          <option>Algumas vezes.</option>
-          <option>Frequentemente.</option>
-          <option>Muito frequentemente / Sempre.</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block font-semibold mb-1" for="p50">50. Nos últimos meses, você tem se sentido frequentemente desmotivado(a) ou com dificuldade de encontrar prazer em atividades que antes gostava? *</label>
-        <select id="p50" name="p50" required class="w-full p-2 border rounded">
+        <label for="p48" class="block mb-2 text-lg font-semibold">48. Você se sente confortável para conversar sobre problemas pessoais no trabalho? <span class="text-red-600">*</span></label>
+        <select id="p48" name="p48" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
           <option>Não.</option>
           <option>Sim.</option>
-          <option>Um pouco.</option>
-          <option>Algumas vezes</option>
-          <option>Raramente.</option>
+          <option>Às vezes.</option>
         </select>
       </div>
 
       <div>
-        <label class="block font-semibold mb-1" for="p51">51. Em algum momento, você recebeu comentários, gestos ou abordagens de cunho sexual no ambiente de trabalho que te deixaram desconfortável? *</label>
-        <select id="p51" name="p51" required class="w-full p-2 border rounded">
-          <option>Quase nunca / Nunca.</option>
-          <option>Poucas vezes.</option>
-          <option>Algumas vezes.</option>
-          <option>Frequentemente.</option>
-          <option>Muito frequentemente / Sempre.</option>
+        <label for="p49" class="block mb-2 text-lg font-semibold">49. Você sente apoio da empresa para questões pessoais que interferem no trabalho? <span class="text-red-600">*</span></label>
+        <select id="p49" name="p49" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
+          <option>Não.</option>
+          <option>Sim.</option>
+          <option>Às vezes.</option>
         </select>
       </div>
 
-      <!-- Botão enviar -->
+      <div>
+        <label for="p50" class="block mb-2 text-lg font-semibold">50. Você se sente respeitado na sua equipe? <span class="text-red-600">*</span></label>
+        <select id="p50" name="p50" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
+          <option>Não.</option>
+          <option>Sim.</option>
+          <option>Às vezes.</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="p51" class="block mb-2 text-lg font-semibold">51. Você acredita que a empresa se preocupa com sua saúde mental? <span class="text-red-600">*</span></label>
+        <select id="p51" name="p51" required
+          class="w-full rounded-md border border-green-300 focus:border-green-500 focus:ring-2 focus:ring-green-300 px-4 py-2 text-green-900 transition">
+          <option>Não.</option>
+          <option>Sim.</option>
+          <option>Às vezes.</option>
+        </select>
+      </div>
+
       <div class="text-center">
-        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
-          Enviar
+        <button type="submit"
+          class="mt-6 bg-green-600 text-white font-semibold px-8 py-3 rounded-md hover:bg-green-700 transition focus:outline-none focus:ring-4 focus:ring-green-400">
+          Enviar Pesquisa
         </button>
       </div>
 
