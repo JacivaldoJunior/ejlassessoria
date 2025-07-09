@@ -10,11 +10,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
   <style>
-    /* Botão flutuante WhatsApp */
     .whatsapp-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
       background-color: #25d366;
       width: 56px;
       height: 56px;
@@ -28,7 +24,6 @@
       color: white;
       font-size: 28px;
       text-decoration: none;
-      z-index: 9999;
       overflow: hidden;
       padding-right: 0;
     }
@@ -39,7 +34,7 @@
       white-space: nowrap;
       color: white;
       font-weight: 600;
-      font-size: 0.875rem; /* text-sm */
+      font-size: 0.875rem;
       margin-left: 8px;
       display: none;
     }
@@ -61,7 +56,6 @@
         <div class="text-green-600 font-bold text-lg">EJL Assessoria em Segurança do Trabalho</div>
       </div>
 
-      <!-- NAV AJUSTADO PARA CENTRALIZAR NO MOBILE -->
       <nav class="flex items-center justify-center space-x-4 w-full md:w-auto mt-3 md:mt-0">
         <button class="text-green-700 font-medium hover:text-green-900 transition">Para empresas</button>
         <button id="btnLogin" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
@@ -75,12 +69,13 @@
   <section class="bg-green-100 py-20 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/2">
-        <!-- Imagem local na mesma pasta -->
         <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-lg shadow-md w-full" />
       </div>
       <div class="md:w-1/2 text-center md:text-left">
         <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">Sua empresa está preparada para a nova NR-01?</h2>
-        <p class="text-lg text-gray-700">A atualização da Norma Regulamentadora NR-01 exige atenção especial aos riscos psicossociais e à saúde mental no ambiente corporativo. É essencial estar em conformidade e adotar medidas eficazes de prevenção e promoção da saúde emocional dos colaboradores.</p>
+        <p class="text-lg text-gray-700">
+          A atualização da Norma Regulamentadora NR-01 exige atenção especial aos riscos psicossociais e à saúde mental no ambiente corporativo. É essencial estar em conformidade e adotar medidas eficazes de prevenção e promoção da saúde emocional dos colaboradores.
+        </p>
       </div>
     </div>
   </section>
@@ -88,69 +83,47 @@
   <!-- Seção de FAQ -->
   <section class="bg-green-50 py-10 px-4 max-w-3xl mx-auto mt-16 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Perguntas Frequentes (FAQ)</h2>
-
     <div class="space-y-4">
-
-      <!-- FAQ 1 -->
       <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que é a NR-01?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          A NR-01 é uma norma do Ministério do Trabalho que estabelece regras gerais sobre segurança e saúde no ambiente de trabalho, incluindo a gestão de riscos psicossociais.
-        </p>
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que é a NR-01?</summary>
+        <p class="mt-2 text-gray-700">A NR-01 é uma norma do Ministério do Trabalho que estabelece regras gerais sobre segurança e saúde no ambiente de trabalho, incluindo a gestão de riscos psicossociais.</p>
       </details>
-
-      <!-- FAQ 2 -->
       <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que são riscos psicossociais?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          São fatores emocionais, sociais e organizacionais que podem afetar negativamente a saúde mental dos trabalhadores, como pressão excessiva, assédio, ou falta de apoio.
-        </p>
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que são riscos psicossociais?</summary>
+        <p class="mt-2 text-gray-700">São fatores emocionais, sociais e organizacionais que podem afetar negativamente a saúde mental dos trabalhadores, como pressão excessiva, assédio, ou falta de apoio.</p>
       </details>
-
-      <!-- FAQ 3 -->
       <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          A pesquisa é anônima?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Sim, pode ser anônima. Isso garante maior sinceridade nas respostas e contribui para um diagnóstico mais fiel do ambiente de trabalho.
-        </p>
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">A pesquisa é anônima?</summary>
+        <p class="mt-2 text-gray-700">Sim, pode ser anônima. Isso garante maior sinceridade nas respostas e contribui para um diagnóstico mais fiel do ambiente de trabalho.</p>
       </details>
-
-      <!-- FAQ 4 -->
       <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          Essa pesquisa atende à NR-01?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Sim. A pesquisa foi elaborada com base nos critérios exigidos pela NR-01, especialmente os relacionados à saúde mental e riscos psicossociais.
-        </p>
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">Essa pesquisa atende à NR-01?</summary>
+        <p class="mt-2 text-gray-700">Sim. A pesquisa foi elaborada com base nos critérios exigidos pela NR-01, especialmente os relacionados à saúde mental e riscos psicossociais.</p>
       </details>
-
-      <!-- FAQ 5 -->
       <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que acontece após o envio da pesquisa?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Após o envio, os dados podem gerar um relatório ou gráfico para análise, e podem ser enviados ao RH de forma segura e organizada.
-        </p>
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que acontece após o envio da pesquisa?</summary>
+        <p class="mt-2 text-gray-700">Após o envio, os dados podem gerar um relatório ou gráfico para análise, e podem ser enviados ao RH de forma segura e organizada.</p>
       </details>
-
     </div>
   </section>
 
-  <!-- Botão flutuante do WhatsApp -->
-  <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out" 
-       style="width: 56px; height: 56px; border-radius: 9999px;">
-    <i class="fab fa-whatsapp text-xl"></i>
-    <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+  <!-- Botões flutuantes WhatsApp e Instagram -->
+  <div class="fixed bottom-6 right-6 flex flex-col items-end gap-3 z-50">
+    <!-- WhatsApp -->
+    <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out"
+         style="width: 56px; height: 56px; border-radius: 9999px;">
+      <i class="fab fa-whatsapp text-xl"></i>
+      <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+    </div>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/seu_perfil_aqui" target="_blank"
+       class="whatsapp-btn bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90">
+      <i class="fab fa-instagram text-xl"></i>
+    </a>
   </div>
 
+  <!-- Scripts -->
   <script>
     const whatsappBtn = document.getElementById("whatsappToggle");
     const whatsappText = document.getElementById("whatsappText");
@@ -168,10 +141,9 @@
     });
   </script>
 
-   <script>
+  <script>
     const btnLogin = document.getElementById('btnLogin');
-
-    if(btnLogin){
+    if (btnLogin) {
       btnLogin.addEventListener('click', () => {
         window.location.href = "formulario.html";
       });
