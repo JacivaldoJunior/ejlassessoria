@@ -9,6 +9,37 @@
   <!-- CDN Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
+  <style>
+    /* Botões flutuantes */
+    .whatsapp-btn {
+      background-color: #25d366;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      font-size: 28px;
+      text-decoration: none;
+      overflow: hidden;
+      padding-right: 0;
+    }
+    .whatsapp-btn:hover {
+      background-color: #128c7e;
+    }
+    .whatsapp-text {
+      white-space: nowrap;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-left: 8px;
+      display: none;
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -49,21 +80,96 @@
     </div>
   </section>
 
+  <!-- Seção de FAQ -->
+  <section class="bg-green-50 py-10 px-4 max-w-3xl mx-auto mt-16 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Perguntas Frequentes (FAQ)</h2>
+
+    <div class="space-y-4">
+      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
+          O que é a NR-01?
+        </summary>
+        <p class="mt-2 text-gray-700">
+          A NR-01 é uma norma do Ministério do Trabalho que estabelece regras gerais sobre segurança e saúde no ambiente de trabalho, incluindo a gestão de riscos psicossociais.
+        </p>
+      </details>
+
+      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
+          O que são riscos psicossociais?
+        </summary>
+        <p class="mt-2 text-gray-700">
+          São fatores emocionais, sociais e organizacionais que podem afetar negativamente a saúde mental dos trabalhadores, como pressão excessiva, assédio, ou falta de apoio.
+        </p>
+      </details>
+
+      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
+          A pesquisa é anônima?
+        </summary>
+        <p class="mt-2 text-gray-700">
+          Sim, pode ser anônima. Isso garante maior sinceridade nas respostas e contribui para um diagnóstico mais fiel do ambiente de trabalho.
+        </p>
+      </details>
+
+      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
+          Essa pesquisa atende à NR-01?
+        </summary>
+        <p class="mt-2 text-gray-700">
+          Sim. A pesquisa foi elaborada com base nos critérios exigidos pela NR-01, especialmente os relacionados à saúde mental e riscos psicossociais.
+        </p>
+      </details>
+
+      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
+          O que acontece após o envio da pesquisa?
+        </summary>
+        <p class="mt-2 text-gray-700">
+          Após o envio, os dados podem gerar um relatório ou gráfico para análise, e podem ser enviados ao RH de forma segura e organizada.
+        </p>
+      </details>
+    </div>
+  </section>
+
   <!-- Botões flutuantes lado a lado -->
-  <div class="fixed bottom-4 right-4 flex flex-row gap-4 z-50">
-    <!-- WhatsApp -->
-    <a href="https://wa.me/5522997985767" target="_blank" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600">
-      <i class="fab fa-whatsapp text-2xl"></i>
+  <div class="fixed bottom-6 right-6 flex space-x-3 z-50">
+    <!-- Botão Instagram -->
+    <a href="https://www.instagram.com/seu_usuario_aqui" target="_blank"
+       class="whatsapp-btn bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500">
+      <i class="fab fa-instagram text-xl"></i>
     </a>
-    <!-- Instagram -->
-    <a href="https://instagram.com/seu_perfil_aqui" target="_blank" class="bg-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-pink-600">
-      <i class="fab fa-instagram text-2xl"></i>
-    </a>
+
+    <!-- Botão WhatsApp com expansão -->
+    <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out"
+         style="width: 56px; height: 56px; border-radius: 9999px;">
+      <i class="fab fa-whatsapp text-xl"></i>
+      <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+    </div>
   </div>
 
-  <!-- Script para botão de pesquisa -->
+  <!-- Script botão WhatsApp -->
+  <script>
+    const whatsappBtn = document.getElementById("whatsappToggle");
+    const whatsappText = document.getElementById("whatsappText");
+    let clickedOnce = false;
+
+    whatsappBtn.addEventListener("click", () => {
+      if (!clickedOnce) {
+        whatsappText.style.display = "inline";
+        whatsappBtn.style.width = "auto";
+        whatsappBtn.style.paddingRight = "16px";
+        clickedOnce = true;
+      } else {
+        window.open("https://wa.me/5522997985767", "_blank");
+      }
+    });
+  </script>
+
+  <!-- Script botão Pesquisa NR-01 -->
   <script>
     const btnLogin = document.getElementById('btnLogin');
+
     if(btnLogin){
       btnLogin.addEventListener('click', () => {
         window.location.href = "formulario.html";
