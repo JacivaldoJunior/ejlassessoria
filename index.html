@@ -9,41 +9,6 @@
   <!-- CDN Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
-  <style>
-    /* Botão flutuante WhatsApp */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background-color: #25d366;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      color: white;
-      font-size: 28px;
-      text-decoration: none;
-      z-index: 9999;
-      overflow: hidden;
-      padding-right: 0;
-    }
-    .whatsapp-btn:hover {
-      background-color: #128c7e;
-    }
-    .whatsapp-text {
-      white-space: nowrap;
-      color: white;
-      font-weight: 600;
-      font-size: 0.875rem; /* text-sm */
-      margin-left: 8px;
-      display: none;
-    }
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -71,11 +36,10 @@
     </div>
   </header>
 
- <!-- Seção NR-01 Ilustrativa -->
+  <!-- Seção NR-01 Ilustrativa -->
   <section class="bg-green-100 py-20 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/2">
-        <!-- Imagem local na mesma pasta -->
         <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-lg shadow-md w-full" />
       </div>
       <div class="md:w-1/2 text-center md:text-left">
@@ -85,33 +49,21 @@
     </div>
   </section>
 
-  <!-- Botão flutuante do WhatsApp -->
-  <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out" 
-       style="width: 56px; height: 56px; border-radius: 9999px;">
-    <i class="fab fa-whatsapp text-xl"></i>
-    <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+  <!-- Botões flutuantes lado a lado -->
+  <div class="fixed bottom-4 right-4 flex flex-row gap-4 z-50">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5522997985767" target="_blank" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600">
+      <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+    <!-- Instagram -->
+    <a href="https://instagram.com/seu_perfil_aqui" target="_blank" class="bg-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-pink-600">
+      <i class="fab fa-instagram text-2xl"></i>
+    </a>
   </div>
 
-  <script>
-    const whatsappBtn = document.getElementById("whatsappToggle");
-    const whatsappText = document.getElementById("whatsappText");
-    let clickedOnce = false;
-
-    whatsappBtn.addEventListener("click", () => {
-      if (!clickedOnce) {
-        whatsappText.style.display = "inline";
-        whatsappBtn.style.width = "auto";
-        whatsappBtn.style.paddingRight = "16px";
-        clickedOnce = true;
-      } else {
-        window.open("https://wa.me/5522997985767", "_blank");
-      }
-    });
-  </script>
-
+  <!-- Script para botão de pesquisa -->
   <script>
     const btnLogin = document.getElementById('btnLogin');
-
     if(btnLogin){
       btnLogin.addEventListener('click', () => {
         window.location.href = "formulario.html";
