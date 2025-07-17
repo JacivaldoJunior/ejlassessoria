@@ -5,181 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EJL Saúde e Segurança</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- CDN Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-
-  <style>
-    /* Botões flutuantes */
-    .whatsapp-btn {
-      background-color: #25d366;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      color: white;
-      font-size: 28px;
-      text-decoration: none;
-      overflow: hidden;
-      padding-right: 0;
-    }
-    .whatsapp-btn:hover {
-      background-color: #128c7e;
-    }
-    .whatsapp-text {
-      white-space: nowrap;
-      color: white;
-      font-weight: 600;
-      font-size: 0.875rem;
-      margin-left: 8px;
-      display: none;
-    }
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Faixa topo -->
   <section class="bg-green-800 text-white py-3 px-6 flex justify-center items-center gap-6 text-sm md:text-base">
-    <p>
-      Cuidar da saúde mental por meio do monitoramento psicossocial evita situações críticas e promove um ambiente de trabalho mais saudável.    
-    </p>
+    <p>Cuidar da saúde mental por meio do monitoramento psicossocial evita situações críticas e promove um ambiente de trabalho mais saudável.</p>
   </section>
 
-  <!-- Cabeçalho -->
-  <header class="bg-white shadow-md py-4">
+  <header class="bg-white shadow py-4">
     <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <div class="text-green-600 font-bold text-lg">EJL Saúde e Segurança</div>
-      </div>
-
-      <!-- NAV AJUSTADO PARA CENTRALIZAR NO MOBILE -->
-      <nav class="flex items-center justify-center space-x-4 w-full md:w-auto mt-3 md:mt-0">
-        <button class="text-green-700 font-medium hover:text-green-900 transition"
-        <button id="btnLogin" class="bg-green-600 text-white py-2 px-4 text-sm rounded-full font-semibold hover:bg-green-700 transition">
-          INICIAR AVALIAÇÃO
-        </button>
+      <div class="text-green-600 font-extrabold text-2xl">EJL Saúde e Segurança</div>
+      <nav class="mt-3 md:mt-0">
+        <button id="btnLogin" class="bg-green-600 text-white px-8 py-3 rounded-full text-base md:text-lg font-bold hover:bg-green-700 transition">Iniciar Avaliação</button>
       </nav>
     </div>
   </header>
 
-  <!-- Seção NR-01 Ilustrativa -->
-  <section class="bg-green-100 py-20 px-4">
+  <section class="bg-green-100 py-16 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/2">
-        <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-lg shadow-md w-full" />
+        <img src="minha-imagem.png" alt="Mudanças na NR-01" class="rounded-xl shadow-lg w-full" />
       </div>
       <div class="md:w-1/2 text-center md:text-left">
-        <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">Avaliação de Fatores Psicossociais.
-          
-
-Fatores psicossociais referem-se aos aspectos relacionados à interação entre o ambiente de trabalho e a saúde mental dos trabalhadores. Eles englobam condições de trabalho, organização, relações interpessoais e como esses elementos afetam o bem-estar emocional e psicológico dos indivíduos, podendo levar a doenças ocupacionais.
-A avaliação e a gestão dos fatores psicossociais são essenciais para garantir um ambiente de trabalho saudável e produtivo. A implementação de medidas preventivas, como a promoção da comunicação transparente, o desenvolvimento de lideranças eficazes e a criação de políticas de apoio aos trabalhadores, pode reduzir os riscos psicossociais e seus impactos negativos.
+        <h2 class="text-4xl font-extrabold text-green-700 mb-4">Avaliação de Fatores Psicossociais</h2>
+        <p class="text-lg leading-relaxed">
+          Fatores psicossociais referem-se aos aspectos relacionados à interação entre o ambiente de trabalho e a saúde mental dos trabalhadores. Eles englobam condições de trabalho, organização, relações interpessoais e como esses elementos afetam o bem-estar emocional e psicológico dos indivíduos, podendo levar a doenças ocupacionais.<br><br>
+          A avaliação e a gestão dos fatores psicossociais são essenciais para garantir um ambiente de trabalho saudável e produtivo. Medidas preventivas como comunicação transparente, lideranças eficazes e políticas de apoio reduzem os riscos psicossociais e seus impactos negativos.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Seção de FAQ -->
-  <section class="bg-green-50 py-10 px-4 max-w-3xl mx-auto mt-16 rounded-lg shadow-md">
+  <section class="bg-green-50 py-10 px-4 max-w-3xl mx-auto mt-16 rounded-lg shadow">
     <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Perguntas Frequentes (FAQ)</h2>
-
     <div class="space-y-4">
-      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que é a NR-01?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          A NR-01 é uma norma do Ministério do Trabalho que estabelece regras gerais sobre segurança e saúde no ambiente de trabalho, incluindo a gestão de riscos psicossociais.
-        </p>
+      <details class="group border border-green-200 bg-white rounded p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que é a NR-01?</summary>
+        <p class="mt-2 text-gray-700">A NR-01 é uma norma do Ministério do Trabalho que estabelece regras gerais sobre segurança e saúde no ambiente de trabalho, incluindo a gestão de riscos psicossociais.</p>
       </details>
-
-      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que são riscos psicossociais?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          São fatores emocionais, sociais e organizacionais que podem afetar negativamente a saúde mental dos trabalhadores, como pressão excessiva, assédio, ou falta de apoio.
-        </p>
+      <details class="group border border-green-200 bg-white rounded p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que são riscos psicossociais?</summary>
+        <p class="mt-2 text-gray-700">São fatores emocionais, sociais e organizacionais que podem afetar negativamente a saúde mental dos trabalhadores, como pressão excessiva, assédio ou falta de apoio.</p>
       </details>
-
-      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          A pesquisa é anônima?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Sim, pode ser anônima. Isso garante maior sinceridade nas respostas e contribui para um diagnóstico mais fiel do ambiente de trabalho.
-        </p>
+      <details class="group border border-green-200 bg-white rounded p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">A pesquisa é anônima?</summary>
+        <p class="mt-2 text-gray-700">Sim, pode ser anônima. Isso garante maior sinceridade nas respostas e contribui para um diagnóstico mais fiel do ambiente de trabalho.</p>
       </details>
-
-      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          Essa pesquisa atende à NR-01?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Sim. A pesquisa foi elaborada com base nos critérios exigidos pela NR-01, especialmente os relacionados à saúde mental e riscos psicossociais.
-        </p>
+      <details class="group border border-green-200 bg-white rounded p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">Essa pesquisa atende à NR-01?</summary>
+        <p class="mt-2 text-gray-700">Sim. A pesquisa foi elaborada com base nos critérios exigidos pela NR-01, especialmente os relacionados à saúde mental e riscos psicossociais.</p>
       </details>
-
-      <details class="group border border-green-200 bg-white rounded-lg p-4 shadow-sm">
-        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">
-          O que acontece após o envio da pesquisa?
-        </summary>
-        <p class="mt-2 text-gray-700">
-          Após o envio, os dados podem gerar um relatório ou gráfico para análise, e podem ser enviados ao RH de forma segura e organizada.
-        </p>
+      <details class="group border border-green-200 bg-white rounded p-4 shadow-sm">
+        <summary class="font-medium cursor-pointer text-green-800 group-open:text-green-600">O que acontece após o envio da pesquisa?</summary>
+        <p class="mt-2 text-gray-700">Após o envio, os dados podem gerar um relatório ou gráfico para análise e podem ser enviados ao RH de forma segura e organizada.</p>
       </details>
     </div>
   </section>
 
-  <!-- Botões flutuantes lado a lado -->
   <div class="fixed bottom-6 right-6 flex space-x-3 z-50">
-    <!-- Botão Instagram -->
-    <a href="https://www.instagram.com/ejlassessoria?igsh=MWc1M3BuMHh2a3pnMA==" target="_blank"
-       class="whatsapp-btn bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500">
+    <a href="https://www.instagram.com/ejlassessoria?igsh=MWc1M3BuMHh2a3pnMA==" target="_blank" class="whatsapp-btn bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 rounded-full p-3 shadow-lg hover:scale-110 transition">
       <i class="fab fa-instagram text-xl"></i>
     </a>
-
-    <!-- Botão WhatsApp com expansão -->
-    <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 transition-all duration-300 ease-in-out"
-         style="width: 56px; height: 56px; border-radius: 9999px;">
-      <i class="fab fa-whatsapp text-xl"></i>
-      <span id="whatsappText" class="whatsapp-text">(22) 99798-5767</span>
+    <div id="whatsappToggle" class="whatsapp-btn flex items-center gap-2 px-4 bg-green-500 rounded-full p-3 shadow-lg hover:bg-green-600 transition" style="cursor:pointer;">
+      <i class="fab fa-whatsapp text-xl text-white"></i>
+      <span id="whatsappText" class="whatsapp-text text-white font-semibold hidden md:inline">(22) 99798-5767</span>
     </div>
   </div>
 
-  <!-- Script botão WhatsApp -->
   <script>
     const whatsappBtn = document.getElementById("whatsappToggle");
     const whatsappText = document.getElementById("whatsappText");
     let clickedOnce = false;
-
     whatsappBtn.addEventListener("click", () => {
       if (!clickedOnce) {
-        whatsappText.style.display = "inline";
-        whatsappBtn.style.width = "auto";
-        whatsappBtn.style.paddingRight = "16px";
+        whatsappText.classList.remove("hidden");
         clickedOnce = true;
       } else {
         window.open("https://wa.me/5522997985767", "_blank");
       }
     });
+    document.getElementById('btnLogin').addEventListener('click', () => {
+      window.location.href = "formulario.html";
+    });
   </script>
-
-  <!-- Script botão Pesquisa NR-01 -->
-  <script>
-    const btnLogin = document.getElementById('btnLogin');
-
-    if(btnLogin){
-      btnLogin.addEventListener('click', () => {
-        window.location.href = "formulario.html";
-      });
-    }
-  </script>
-
 </body>
 </html>
