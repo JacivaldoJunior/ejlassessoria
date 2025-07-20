@@ -10,7 +10,8 @@
     .center { text-align: center; margin-top: 50px; }
     input[type="password"] { padding: 10px; width: 200px; }
     button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
-    canvas { margin: 30px 0; }
+    .chart-container { margin: 30px 0; }
+    .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
   </style>
 </head>
 <body>
@@ -24,7 +25,8 @@
 
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
-  <canvas id="chart"></canvas>
+  <div class="summary" id="summary"></div>
+  <div id="charts"></div>
 </div>
 
 <script>
@@ -46,91 +48,62 @@ async function loadData() {
   const res = await fetch(url);
   const data = await res.json();
 
-  const perguntas = [
-    "1. Você tem que realizar atividades que não fazem parte da sua função?",
-    "2. Sente-se tenso(a) no ambiente de trabalho?",
-    "3. A função que você exerce exige um ritmo de trabalho intenso?",
-    "4. É claro para você como deve executar seu serviço?",
-    "5. Seu trabalho exige novas ideias?",
-    "6. Você tem que lidar com diversas demandas ao mesmo tempo?",
-    "7. Seu trabalho exige que saiba lidar com tensão?",
-    "8. A empresa é justa com os colaboradores?",
-    "9. Você discorda de algumas funções atribuídas?",
-    "10. Você realiza atividades moralmente erradas?",
-    "11. Você se sente inseguro na sua habilidade?",
-    "12. Você se sente mentalmente exausto?",
-    "13. Você pode realizar seu trabalho sem pressa?",
-    "14. Você é reconhecido pela gerência?",
-    "15. Você se sente tenso durante a atividade?",
-    "16. Recebe comentários sexuais incômodos?",
-    "17. Você está sobrecarregado?",
-    "18. Você sofre desrespeito?",
-    "19. Você sente dificuldade para se concentrar?",
-    "20. Você pode controlar a quantidade de tarefas?",
-    "21. Você toma decisões arriscadas?",
-    "22. A distribuição de tarefas é justa?",
-    "23. A empresa respeita o bem-estar dos colaboradores?",
-    "24. Seu trabalho tem prazos curtos?",
-    "25. Já recebeu ofensas no ambiente de trabalho?",
-    "26. Você acorda descansado?",
-    "27. Já foi exposto publicamente com informações confidenciais?",
-    "28. Há colega agressivo?",
-    "29. Recebe comentários desagradáveis sobre cor, orientação ou religião?",
-    "30. Precisa esconder emoções?",
-    "31. Empresa incentiva seu desenvolvimento?",
-    "32. Conflitos são resolvidos de forma justa?",
-    "33. Você se sente irritado?",
-    "34. Você se sente fracassado?",
-    "35. Pode confiar nos colegas?",
-    "36. Pode contar com colegas em situações difíceis?",
-    "37. Você se sente preocupado com o trabalho?",
-    "38. É excluído de grupos ou reuniões?",
-    "39. Sente-se ansioso no trabalho?",
-    "40. Sente-se triste no trabalho?",
-    "41. Sente-se pressionado?",
-    "42. Possui apoio do líder?",
-    "43. É tratado de forma justa e respeitosa pela liderança?",
-    "44. Trabalho faz você se sentir bem?",
-    "45. Você se sente motivado?",
-    "46. Você se sente bem na profissão?",
-    "47. Sente orgulho da profissão?",
-    "48. Confortável para conversar sobre problemas pessoais?",
-    "49. Sente apoio da empresa em questões pessoais?",
-    "50. Sente-se respeitado na equipe?",
-    "51. Acredita que a empresa se preocupa com saúde mental?"
-  ];
+  const perguntas = Array.from({ length: 51 }, (_, i) => `P${i + 1}`);
+  const respostasUnicas = {};
+  const colaboradores = [];
+  const empresas = [];
 
-  const contagem = new Array(perguntas.length).fill(0);
-  data.forEach(resposta => {
-    perguntas.forEach((_, idx) => {
-      const pKey = `P${idx + 1}`;
-      if (resposta[pKey]) contagem[idx]++;
+  perguntas.forEach(p => respostasUnicas[p] = {});
+
+  data.forEach(entry => {
+    if (entry.NomeCompleto && !colaboradores.includes(entry.NomeCompleto)) {
+      colaboradores.push(entry.NomeCompleto);
+    }
+    if (entry.Empresa && !empresas.includes(entry.Empresa)) {
+      empresas.push(entry.Empresa);
+    }
+    perguntas.forEach(p => {
+      const resposta = entry[p] || 'Sem resposta';
+      respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
     });
   });
 
-  const ctx = document.getElementById('chart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: perguntas,
-      datasets: [{
-        label: 'Número de Respostas',
-        data: contagem,
-        backgroundColor: 'rgba(46,125,50,0.7)',
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: { enabled: true }
+  document.getElementById('summary').innerHTML = `
+    <strong>Colaboradores:</strong> ${colaboradores.join(', ')}<br>
+    <strong>Empresas:</strong> ${empresas.join(', ')}`;
+
+  const chartsDiv = document.getElementById('charts');
+  perguntas.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'chart-container';
+    div.innerHTML = `<h3>${idx + 1}. ${p}</h3><canvas id="chart${idx}"></canvas>`;
+    chartsDiv.appendChild(div);
+
+    const ctx = document.getElementById(`chart${idx}`).getContext('2d');
+    const labels = Object.keys(respostasUnicas[p]);
+    const values = Object.values(respostasUnicas[p]);
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Respostas',
+          data: values,
+          backgroundColor: 'rgba(46,125,50,0.7)'
+        }]
       },
-      scales: {
-        x: { beginAtZero: true },
-        y: { ticks: { maxRotation: 90, minRotation: 0 } }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
       }
-    }
+    });
   });
 }
 </script>
