@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Gráficos - EJL Saúde e Segurança</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f8f5; }
+    .hidden { display: none; }
+    .center { text-align: center; margin-top: 50px; }
+    input[type="password"] { padding: 10px; width: 200px; }
+    button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
+    canvas { margin: 30px 0; }
+  </style>
+</head>
+<body>
+
+<div id="login" class="center">
+  <h2>Painel de Gráficos - Login</h2>
+  <input type="password" id="password" placeholder="Digite a senha">
+  <button onclick="checkPassword()">Entrar</button>
+  <p id="loginError" style="color:red;"></p>
+</div>
+
+<div id="panel" class="hidden">
+  <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
+  <canvas id="chart"></canvas>
+</div>
+
+<script>
+const senhaCorreta = 'admin123';
+
+function checkPassword() {
+  const senha = document.getElementById('password').value;
+  if (senha === senhaCorreta) {
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    loadData();
+  } else {
+    document.getElementById('loginError').innerText = 'Senha incorreta!';
+  }
+}
+
+async function loadData() {
+  const url = 'https://opensheet.elk.sh/1nb0bIo1Kx5ksgHw0IqV1B0oWauNNIyQ0jORQBiK2P8g/Respostas';
+  const res = await fetch(url);
+  const data = await res.json();
+
+  // Perguntas reais
+  const perguntas = [
+    "1. Você tem que realizar atividades que não fazem parte da sua função?",
+    "2. Sente-se tenso(a) no ambiente de trabalho?",
+    "3. A função que você exerce exige um ritmo de trabalho intenso?",
+    "4. É claro para você como deve executar seu serviço?",
+    "5. Seu trabalho exige novas ideias?",
+    "6. Você tem que lidar com diversas demandas ao mesmo tempo em sua rotina de trabalho?",
+    "7. Seu trabalho exige que você saiba lidar com situações de tensão?",
+    "8. A empresa é justa no tratamento de seus colaboradores?",
+    "9. Você discorda de algumas funções que lhe são atribuídas?",
+    "10. Você tem que realizar atividades que considera moralmente erradas?",
+    "11. Você se sente inseguro(a) na sua habilidade de realizar tarefas?",
+    "12. Você se sente mentalmente exausto(a) no trabalho?",
+    "13. Você pode realizar seu trabalho sem pressa para entrega do serviço?",
+    "14. Você se sente reconhecido(a) por parte da gerência pelo trabalho desempenhado?",
+    "15. Você se sente tenso(a) durante sua atividade?",
+    "16. Você recebe comentários sexuais durante seu trabalho que te incomodam?",
+    "17. Você se sente sobrecarregado(a) com a quantidade de tarefas que precisa executar?",
+    "18. Você sofre desrespeito em seu ambiente de trabalho?",
+    "19. Você sente dificuldade para se concentrar?",
+    "20. Você pode delimitar/controlar a quantidade de tarefas que será exercida?",
+    "21. No trabalho, você deve tomar decisões arriscadas?",
+    "22. A distribuição de tarefas entre os colaboradores é justa?",
+    "23. A empresa tem respeito pelo bem-estar de seus colaboradores?",
+    "24. Seu trabalho exige prazos curtos para entrega de serviço?",
+    "25. Já recebeu ofensas no seu ambiente de trabalho de colegas ou líderes?",
+    "26. Você se sente descansado(a) ao acordar?",
+    "27. No ambiente de trabalho, você já foi exposto publicamente com informações que deveriam ser confidenciais?",
+    "28. Há algum colega de trabalho que é agressivo na maneira de falar e tratar você?",
+    "29. No trabalho, você recebe comentários desagradáveis por causa da sua cor de pele, orientação sexual ou religiosa?",
+    "30. Você precisa esconder as suas emoções em seu local de trabalho?",
+    "31. Sua empresa incentiva seu desenvolvimento no trabalho?",
+    "32. Os conflitos entre colaboradores são resolvidos de maneira justa?",
+    "33. Você se sente irritado no seu ambiente de trabalho?",
+    "34. Você se sente fracassado(a) no ambiente de trabalho?",
+    "35. Você pode confiar nos seus colegas de trabalho?",
+    "36. Você pode contar com seus colegas quando está com uma situação difícil no trabalho?",
+    "37. Você se sente preocupado(a) referente ao trabalho?",
+    "38. Você é excluído(a) de grupos, conversas ou reuniões de trabalho nas quais acha que deveria participar?",
+    "39. Você se sente ansioso(a) no ambiente de trabalho?",
+    "40. Você se sente triste no seu ambiente de trabalho?",
+    "41. Você se sente pressionado(a) no seu ambiente de trabalho?",
+    "42. Você possui apoio do seu líder?",
+    "43. Você se sente tratado(a) de forma justa e respeitosa por parte da liderança?",
+    "44. Seu trabalho te faz se sentir bem consigo mesmo?",
+    "45. Você se sente motivado com o trabalho que realiza?",
+    "46. Você se sente bem na sua profissão?",
+    "47. Você sente orgulho da sua profissão?",
+    "48. Você se sente confortável para conversar sobre problemas pessoais no trabalho?",
+    "49. Você sente apoio da empresa para questões pessoais que interferem no trabalho?",
+    "50. Você se sente respeitado na sua equipe?",
+    "51. Você acredita que a empresa se preocupa com sua saúde mental?"
+  ];
+
+  // Contagem por pergunta (só exemplo básico)
+  const contagem = new Array(perguntas.length).fill(0);
+  data.forEach(resposta => {
+    perguntas.forEach((_, idx) => {
+      const pKey = `P${idx + 1}`;
+      if (resposta[pKey]) contagem[idx]++;
+    });
+  });
+
+  const ctx = document.getElementById('chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: perguntas,
+      datasets: [{
+        label: 'Número de Respostas',
+        data: contagem,
+        backgroundColor: 'rgba(46,125,50,0.7)',
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true }
+      },
+      scales: {
+        x: { beginAtZero: true },
+        y: { ticks: { callback: function(val) { return perguntas[val]; }, maxRotation: 90, minRotation: 0 } }
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
