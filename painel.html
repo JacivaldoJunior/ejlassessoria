@@ -42,11 +42,10 @@ function checkPassword() {
 }
 
 async function loadData() {
-  const url = 'https://opensheet.elk.sh/1nb0bIo1Kx5ksgHw0IqV1B0oWauNNIyQ0jORQBiK2P8g/Respostas';
+  const url = 'https://opensheet.elk.sh/1nb0bIo1Kx5kgHw0IqV1B0oWauNNIyQ0jORQBiK2P8g/Página1';
   const res = await fetch(url);
   const data = await res.json();
 
-  // Perguntas reais
   const perguntas = [
     "1. Você tem que realizar atividades que não fazem parte da sua função?",
     "2. Sente-se tenso(a) no ambiente de trabalho?",
@@ -101,7 +100,6 @@ async function loadData() {
     "51. Você acredita que a empresa se preocupa com sua saúde mental?"
   ];
 
-  // Contagem por pergunta (só exemplo básico)
   const contagem = new Array(perguntas.length).fill(0);
   data.forEach(resposta => {
     perguntas.forEach((_, idx) => {
@@ -130,7 +128,7 @@ async function loadData() {
       },
       scales: {
         x: { beginAtZero: true },
-        y: { ticks: { callback: function(val) { return perguntas[val]; }, maxRotation: 90, minRotation: 0 } }
+        y: { ticks: { maxRotation: 90, minRotation: 0 } }
       }
     }
   });
