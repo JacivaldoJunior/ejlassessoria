@@ -10,10 +10,11 @@
     .center { text-align: center; margin-top: 50px; }
     input[type="password"] { padding: 10px; width: 200px; }
     button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
-    .chart-container { margin: 30px 0; }
-    .chart-container canvas { max-height: 300px; }
+    .chart-container { margin: 30px 0; display: flex; align-items: center; }
+    .chart-container canvas { max-height: 200px; max-width: 600px; }
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
     select { margin: 10px; padding: 5px; }
+    .question-label { width: 300px; font-size: 0.9em; margin-right: 10px; }
   </style>
 </head>
 <body>
@@ -41,6 +42,30 @@
 const senhaCorreta = 'admin123';
 let globalData = null;
 
+const perguntasTextos = [
+  '1. Você tem que realizar atividades que não fazem parte da sua função?',
+  '2. A função que você exerce exige um ritmo de trabalho intenso?',
+  '3. Seu trabalho exige novas ideias?',
+  '4. Seu trabalho exige que saiba lidar com tensão?',
+  '5. Você discorda de algumas funções atribuídas?',
+  '6. Você se sente inseguro na sua habilidade?',
+  '7. Você pode realizar seu trabalho sem pressa?',
+  '8. Você se sente tenso durante a atividade?',
+  '9. Você está sobrecarregado?',
+  '10. Você sente dificuldade para se concentrar?',
+  '11. Você toma decisões arriscadas?',
+  '12. A empresa respeita o bem-estar dos colaboradores?',
+  '13. Já recebeu ofensas no ambiente de trabalho?',
+  '14. Já foi exposto publicamente com informações confidenciais?',
+  '15. Recebe comentários desagradáveis sobre cor, orientação ou religião?',
+  '16. Empresa incentiva seu desenvolvimento?',
+  '17. Está irritado?',
+  '18. Pode confiar nos colegas?',
+  '19. Você se sente preocupado com o trabalho?',
+  '20. Sente-se ansioso no trabalho?'
+  //... (adicione até P51 se quiser)
+];
+
 function checkPassword() {
   const senha = document.getElementById('password').value;
   if (senha === senhaCorreta) {
@@ -60,7 +85,7 @@ async function loadData() {
 }
 
 function buildCharts() {
-  const perguntas = Array.from({ length: 51 }, (_, i) => `P${i + 1}`);
+  const perguntas = Array.from({ length: perguntasTextos.length }, (_, i) => `P${i + 1}`);
   const respostasUnicas = {};
   const colaboradores = [];
   const empresas = [];
@@ -85,7 +110,7 @@ function buildCharts() {
   perguntas.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = 'chart-container';
-    div.innerHTML = `<h3>${idx + 1}. ${p}</h3><canvas id="chart${idx}"></canvas>`;
+    div.innerHTML = `<div class="question-label">${perguntasTextos[idx] || p}</div><canvas id="chart${idx}"></canvas>`;
     chartsDiv.appendChild(div);
 
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
@@ -103,10 +128,11 @@ function buildCharts() {
         }]
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: chartType !== 'bar' } },
-        scales: chartType === 'bar' ? { y: { beginAtZero: true } } : {}
+        scales: chartType === 'bar' ? { x: { beginAtZero: true } } : {}
       }
     });
   });
