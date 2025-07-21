@@ -11,7 +11,7 @@
     input[type="password"] { padding: 10px; width: 200px; }
     button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
     .chart-container { margin: 30px 0; display: flex; align-items: center; }
-    .chart-container canvas { max-height: 200px; max-width: 600px; }
+    .chart-container canvas { max-height: 250px; max-width: 600px; }
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
     select { margin: 10px; padding: 5px; }
     .question-label { width: 300px; font-size: 0.9em; margin-right: 10px; }
@@ -34,6 +34,9 @@
     <option value="bar">Coluna</option>
     <option value="pie">Pizza</option>
     <option value="doughnut">Rosca</option>
+    <option value="line">Linha</option>
+    <option value="radar">Radar</option>
+    <option value="polarArea">Área Polar</option>
   </select>
   <div id="charts"></div>
 </div>
@@ -52,18 +55,8 @@ const perguntasTextos = [
   '7. Você pode realizar seu trabalho sem pressa?',
   '8. Você se sente tenso durante a atividade?',
   '9. Você está sobrecarregado?',
-  '10. Você sente dificuldade para se concentrar?',
-  '11. Você toma decisões arriscadas?',
-  '12. A empresa respeita o bem-estar dos colaboradores?',
-  '13. Já recebeu ofensas no ambiente de trabalho?',
-  '14. Já foi exposto publicamente com informações confidenciais?',
-  '15. Recebe comentários desagradáveis sobre cor, orientação ou religião?',
-  '16. Empresa incentiva seu desenvolvimento?',
-  '17. Está irritado?',
-  '18. Pode confiar nos colegas?',
-  '19. Você se sente preocupado com o trabalho?',
-  '20. Sente-se ansioso no trabalho?'
-  //... (adicione até P51 se quiser)
+  '10. Você sente dificuldade para se concentrar?'
+  // Adicione mais se quiser
 ];
 
 function checkPassword() {
@@ -124,15 +117,15 @@ function buildCharts() {
         datasets: [{
           label: 'Respostas',
           data: values,
-          backgroundColor: chartType === 'bar' ? 'rgba(46,125,50,0.7)' : labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
+          backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
         }]
       },
       options: {
-        indexAxis: 'y',
+        indexAxis: chartType === 'bar' ? 'y' : 'x',
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: chartType !== 'bar' } },
-        scales: chartType === 'bar' ? { x: { beginAtZero: true } } : {}
+        scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {}
       }
     });
   });
