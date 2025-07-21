@@ -11,7 +11,9 @@
     input[type="password"] { padding: 10px; width: 200px; }
     button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
     .chart-container { margin: 30px 0; }
+    .chart-container canvas { max-height: 300px; }
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
+    select { margin: 10px; padding: 5px; }
   </style>
 </head>
 <body>
@@ -26,11 +28,18 @@
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
   <div class="summary" id="summary"></div>
+  <label for="chartType">Tipo de Gráfico:</label>
+  <select id="chartType" onchange="reloadCharts()">
+    <option value="bar">Coluna</option>
+    <option value="pie">Pizza</option>
+    <option value="doughnut">Rosca</option>
+  </select>
   <div id="charts"></div>
 </div>
 
 <script>
 const senhaCorreta = 'admin123';
+let globalData = null;
 
 function checkPassword() {
   const senha = document.getElementById('password').value;
@@ -46,8 +55,11 @@ function checkPassword() {
 async function loadData() {
   const url = 'https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados';
   const res = await fetch(url);
-  const data = await res.json();
+  globalData = await res.json();
+  buildCharts();
+}
 
+function buildCharts() {
   const perguntas = Array.from({ length: 51 }, (_, i) => `P${i + 1}`);
   const respostasUnicas = {};
   const colaboradores = [];
@@ -55,24 +67,21 @@ async function loadData() {
 
   perguntas.forEach(p => respostasUnicas[p] = {});
 
-  data.forEach(entry => {
-    if (entry.NomeCompleto && !colaboradores.includes(entry.NomeCompleto)) {
-      colaboradores.push(entry.NomeCompleto);
-    }
-    if (entry.Empresa && !empresas.includes(entry.Empresa)) {
-      empresas.push(entry.Empresa);
-    }
+  globalData.forEach(entry => {
+    if (entry.NomeCompleto && !colaboradores.includes(entry.NomeCompleto)) colaboradores.push(entry.NomeCompleto);
+    if (entry.Empresa && !empresas.includes(entry.Empresa)) empresas.push(entry.Empresa);
     perguntas.forEach(p => {
       const resposta = entry[p] || 'Sem resposta';
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
     });
   });
 
-  document.getElementById('summary').innerHTML = `
-    <strong>Colaboradores:</strong> ${colaboradores.join(', ')}<br>
-    <strong>Empresas:</strong> ${empresas.join(', ')}`;
+  document.getElementById('summary').innerHTML = `<strong>Colaboradores:</strong> ${colaboradores.join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${empresas.join(', ') || 'Nenhuma'}`;
 
   const chartsDiv = document.getElementById('charts');
+  chartsDiv.innerHTML = '';
+  const chartType = document.getElementById('chartType').value;
+
   perguntas.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = 'chart-container';
@@ -84,27 +93,27 @@ async function loadData() {
     const values = Object.values(respostasUnicas[p]);
 
     new Chart(ctx, {
-      type: 'bar',
+      type: chartType,
       data: {
         labels: labels,
         datasets: [{
           label: 'Respostas',
           data: values,
-          backgroundColor: 'rgba(46,125,50,0.7)'
+          backgroundColor: chartType === 'bar' ? 'rgba(46,125,50,0.7)' : labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
         }]
       },
       options: {
         responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: true }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
+        maintainAspectRatio: false,
+        plugins: { legend: { display: chartType !== 'bar' } },
+        scales: chartType === 'bar' ? { y: { beginAtZero: true } } : {}
       }
     });
   });
+}
+
+function reloadCharts() {
+  if (globalData) buildCharts();
 }
 </script>
 
