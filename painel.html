@@ -47,16 +47,56 @@ let globalData = null;
 
 const perguntasTextos = [
   '1. Você tem que realizar atividades que não fazem parte da sua função?',
-  '2. A função que você exerce exige um ritmo de trabalho intenso?',
-  '3. Seu trabalho exige novas ideias?',
-  '4. Seu trabalho exige que saiba lidar com tensão?',
-  '5. Você discorda de algumas funções atribuídas?',
-  '6. Você se sente inseguro na sua habilidade?',
-  '7. Você pode realizar seu trabalho sem pressa?',
-  '8. Você se sente tenso durante a atividade?',
-  '9. Você está sobrecarregado?',
-  '10. Você sente dificuldade para se concentrar?'
-  // Adicione mais se quiser
+  '2. Sente-se tenso(a) no ambiente de trabalho?',
+  '3. A função que você exerce exige um ritmo de trabalho intenso?',
+  '4. É claro para você como deve executar seu serviço?',
+  '5. Seu trabalho exige novas ideias?',
+  '6. Você tem que lidar com diversas demandas ao mesmo tempo?',
+  '7. Seu trabalho exige que você saiba lidar com situações de tensão?',
+  '8. A empresa é justa no tratamento de seus colaboradores?',
+  '9. Você discorda de algumas funções que lhe são atribuídas?',
+  '10. Você tem que realizar atividades que considera moralmente erradas?',
+  '11. Você se sente inseguro(a) na sua habilidade de realizar tarefas?',
+  '12. Você se sente mentalmente exausto(a) no trabalho?',
+  '13. Você pode realizar seu trabalho sem pressa para entrega do serviço?',
+  '14. Você se sente reconhecido(a) pela gerência pelo trabalho desempenhado?',
+  '15. Você se sente tenso(a) durante sua atividade?',
+  '16. Você recebe comentários sexuais durante seu trabalho que te incomodam?',
+  '17. Você se sente sobrecarregado(a) com a quantidade de tarefas?',
+  '18. Você sofre desrespeito em seu ambiente de trabalho?',
+  '19. Você sente dificuldade para se concentrar?',
+  '20. Você pode controlar a quantidade de tarefas que será exercida?',
+  '21. No trabalho, você deve tomar decisões arriscadas?',
+  '22. A distribuição de tarefas entre os colaboradores é justa?',
+  '23. A empresa tem respeito pelo bem-estar dos colaboradores?',
+  '24. Seu trabalho exige prazos curtos para entrega de serviço?',
+  '25. Já recebeu ofensas no ambiente de trabalho de colegas ou líderes?',
+  '26. Você se sente descansado(a) ao acordar?',
+  '27. Já foi exposto publicamente com informações confidenciais?',
+  '28. Há colegas agressivos na maneira de falar e tratar você?',
+  '29. Você recebe comentários desagradáveis por cor, orientação ou religião?',
+  '30. Você precisa esconder suas emoções no trabalho?',
+  '31. Sua empresa incentiva seu desenvolvimento no trabalho?',
+  '32. Os conflitos entre colaboradores são resolvidos de forma justa?',
+  '33. Você se sente irritado(a) no ambiente de trabalho?',
+  '34. Você se sente fracassado(a) no ambiente de trabalho?',
+  '35. Você pode confiar nos seus colegas de trabalho?',
+  '36. Você pode contar com colegas quando está em dificuldade?',
+  '37. Você se sente preocupado(a) referente ao trabalho?',
+  '38. Você é excluído(a) de grupos ou reuniões de trabalho?',
+  '39. Você se sente ansioso(a) no ambiente de trabalho?',
+  '40. Você se sente triste no ambiente de trabalho?',
+  '41. Você se sente pressionado(a) no ambiente de trabalho?',
+  '42. Você possui apoio do seu líder?',
+  '43. Você é tratado(a) de forma justa e respeitosa pela liderança?',
+  '44. Seu trabalho te faz se sentir bem consigo mesmo?',
+  '45. Você se sente motivado(a) com o trabalho que realiza?',
+  '46. Você se sente bem na sua profissão?',
+  '47. Você sente orgulho da sua profissão?',
+  '48. Você se sente confortável para falar de problemas pessoais no trabalho?',
+  '49. Você sente apoio da empresa para questões pessoais que interferem no trabalho?',
+  '50. Você se sente respeitado(a) na sua equipe?',
+  '51. Você acredita que a empresa se preocupa com sua saúde mental?'
 ];
 
 function checkPassword() {
@@ -78,7 +118,7 @@ async function loadData() {
 }
 
 function buildCharts() {
-  const perguntas = Array.from({ length: perguntasTextos.length }, (_, i) => `P${i + 1}`);
+  const perguntas = Array.from({ length: perguntasTextos.length }, (_, i) => `p${i + 1}`);
   const respostasUnicas = {};
   const colaboradores = [];
   const empresas = [];
@@ -86,8 +126,8 @@ function buildCharts() {
   perguntas.forEach(p => respostasUnicas[p] = {});
 
   globalData.forEach(entry => {
-    if (entry.NomeCompleto && !colaboradores.includes(entry.NomeCompleto)) colaboradores.push(entry.NomeCompleto);
-    if (entry.Empresa && !empresas.includes(entry.Empresa)) empresas.push(entry.Empresa);
+    if (entry.nomecompleto && !colaboradores.includes(entry.nomecompleto)) colaboradores.push(entry.nomecompleto);
+    if (entry.empresa && !empresas.includes(entry.empresa)) empresas.push(entry.empresa);
     perguntas.forEach(p => {
       const resposta = entry[p] || 'Sem resposta';
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
