@@ -49,7 +49,8 @@ const senhaCorreta = 'admin123';
 let globalData = null;
 const perguntasTextos = [...Array(51)].map((_, i) => `${i + 1}. Pergunta`);
 function checkPassword() {
-  if (document.getElementById('password').value === senhaCorreta) {
+  const senhaDigitada = document.getElementById('password').value.trim();
+  if (senhaDigitada === senhaCorreta) {
     document.getElementById('login').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
     loadData();
@@ -66,12 +67,14 @@ async function loadData() {
 function buildCharts() {
   const perguntas = [...Array(51)].map((_, i) => `p${i + 1}`);
   const respostasUnicas = {}, colaboradores = [], empresas = [];
-  perguntas.forEach(p => respostasUnicas[p] = {});
   globalData.forEach(entry => {
-    if (entry.nome_completo && !colaboradores.includes(entry.nome_completo)) colaboradores.push(entry.nome_completo);
-    if (entry.empresa && !empresas.includes(entry.empresa)) empresas.push(entry.empresa);
+    const nome = entry.nome_completo || entry.NomeCompleto || entry.nomeCompleto;
+    const empresa = entry.empresa || entry.Empresa;
+    if (nome && !colaboradores.includes(nome)) colaboradores.push(nome);
+    if (empresa && !empresas.includes(empresa)) empresas.push(empresa);
     perguntas.forEach(p => {
       const resposta = entry[p] || 'Sem resposta';
+      if (!respostasUnicas[p]) respostasUnicas[p] = {};
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
     });
   });
