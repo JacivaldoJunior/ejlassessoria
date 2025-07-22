@@ -18,6 +18,10 @@
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
     select { margin: 10px; padding: 5px; }
     .question-label { width: 300px; font-size: 0.9em; margin-right: 10px; }
+    .export-menu { position: relative; display: inline-block; }
+    .export-options { display: none; position: absolute; background: white; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 100; }
+    .export-options div { padding: 8px; cursor: pointer; }
+    .export-options div:hover { background-color: #f0f0f0; }
   </style>
 </head>
 <body>
@@ -43,12 +47,23 @@
     <option value="radar">Radar</option>
     <option value="polarArea">Área Polar</option>
   </select>
-  <button onclick="exportAll()">Exportar ▼</button>
+
+  <div class="export-menu">
+    <button onclick="toggleExportMenu()">Exportar ▼</button>
+    <div id="exportMenu" class="export-options">
+      <div onclick="exportPDF()">📄 Exportar PDF</div>
+      <div onclick="exportImage()">🖼️ Exportar Imagem</div>
+      <div onclick="exportExcel()">📊 Exportar Excel</div>
+    </div>
+  </div>
+
   <div id="charts"></div>
 </div>
+
 <script>
 const senhaCorreta = 'admin123';
 let globalData = null;
+
 const perguntasTextos = [
   "1. Você tem que realizar atividades que não fazem parte da sua função?",
   "2. Sente-se tenso(a) no ambiente de trabalho?",
@@ -113,6 +128,7 @@ function checkPassword() {
     document.getElementById('loginError').innerText = 'Senha incorreta!';
   }
 }
+
 async function loadData() {
   const url = 'https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados';
   const res = await fetch(url);
@@ -127,6 +143,7 @@ async function loadData() {
   });
   buildCharts();
 }
+
 function buildCharts() {
   const selectedEmpresa = document.getElementById('empresaFilter').value;
   const perguntas = [...Array(51)].map((_, i) => `p${i + 1}`);
@@ -158,12 +175,20 @@ function buildCharts() {
     new Chart(ctx, { type: chartType, data: { labels, datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] }, options: { indexAxis: chartType === 'bar' ? 'y' : 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar' } }, scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {} } });
   });
 }
+
 function reloadCharts() { if (globalData) buildCharts(); }
-function exportAll() {
-  if (confirm('Escolha OK para exportar PDF, Cancelar para imagem, ou aguarde para Excel.')) exportPDF();
-  else if (confirm('Exportar como imagem?')) exportImage();
-  else exportExcel();
+
+function toggleExportMenu() {
+  const menu = document.getElementById('exportMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
+
+window.addEventListener('click', function(event) {
+  if (!event.target.closest('.export-menu')) {
+    document.getElementById('exportMenu').style.display = 'none';
+  }
+});
+
 async function exportPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
@@ -177,6 +202,7 @@ async function exportPDF() {
     doc.save('graficos.pdf');
   });
 }
+
 async function exportImage() {
   const chartsDiv = document.getElementById('charts');
   await html2canvas(chartsDiv).then(canvas => {
@@ -186,6 +212,7 @@ async function exportImage() {
     link.click();
   });
 }
+
 function exportExcel() {
   const ws = XLSX.utils.json_to_sheet(globalData);
   const wb = XLSX.utils.book_new();
