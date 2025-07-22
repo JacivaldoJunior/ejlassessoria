@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <title>Painel de Gráficos - EJL Saúde e Segurança</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f8f5; }
     .hidden { display: none; }
     .center { text-align: center; margin-top: 50px; }
     input[type="password"] { padding: 10px; width: 200px; }
-    button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; }
+    button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; margin: 5px; }
     .chart-container { margin: 30px 0; display: flex; align-items: center; }
     .chart-container canvas { max-height: 250px; max-width: 600px; }
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
@@ -18,14 +21,12 @@
   </style>
 </head>
 <body>
-
 <div id="login" class="center">
   <h2>Painel de Gráficos - Login</h2>
   <input type="password" id="password" placeholder="Digite a senha">
   <button onclick="checkPassword()">Entrar</button>
   <p id="loginError" style="color:red;"></p>
 </div>
-
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
   <div class="summary" id="summary"></div>
@@ -38,70 +39,17 @@
     <option value="radar">Radar</option>
     <option value="polarArea">Área Polar</option>
   </select>
+  <button onclick="exportPDF()">Exportar PDF</button>
+  <button onclick="exportImage()">Exportar Imagem</button>
+  <button onclick="exportExcel()">Exportar Excel</button>
   <div id="charts"></div>
 </div>
-
 <script>
 const senhaCorreta = 'admin123';
 let globalData = null;
-
-const perguntasTextos = [
-  '1. Você tem que realizar atividades que não fazem parte da sua função?',
-  '2. Sente-se tenso(a) no ambiente de trabalho?',
-  '3. A função que você exerce exige um ritmo de trabalho intenso?',
-  '4. É claro para você como deve executar seu serviço?',
-  '5. Seu trabalho exige novas ideias?',
-  '6. Você tem que lidar com diversas demandas ao mesmo tempo?',
-  '7. Seu trabalho exige que você saiba lidar com situações de tensão?',
-  '8. A empresa é justa no tratamento de seus colaboradores?',
-  '9. Você discorda de algumas funções que lhe são atribuídas?',
-  '10. Você tem que realizar atividades que considera moralmente erradas?',
-  '11. Você se sente inseguro(a) na sua habilidade de realizar tarefas?',
-  '12. Você se sente mentalmente exausto(a) no trabalho?',
-  '13. Você pode realizar seu trabalho sem pressa para entrega do serviço?',
-  '14. Você se sente reconhecido(a) pela gerência pelo trabalho desempenhado?',
-  '15. Você se sente tenso(a) durante sua atividade?',
-  '16. Você recebe comentários sexuais durante seu trabalho que te incomodam?',
-  '17. Você se sente sobrecarregado(a) com a quantidade de tarefas?',
-  '18. Você sofre desrespeito em seu ambiente de trabalho?',
-  '19. Você sente dificuldade para se concentrar?',
-  '20. Você pode controlar a quantidade de tarefas que será exercida?',
-  '21. No trabalho, você deve tomar decisões arriscadas?',
-  '22. A distribuição de tarefas entre os colaboradores é justa?',
-  '23. A empresa tem respeito pelo bem-estar dos colaboradores?',
-  '24. Seu trabalho exige prazos curtos para entrega de serviço?',
-  '25. Já recebeu ofensas no ambiente de trabalho de colegas ou líderes?',
-  '26. Você se sente descansado(a) ao acordar?',
-  '27. Já foi exposto publicamente com informações confidenciais?',
-  '28. Há colegas agressivos na maneira de falar e tratar você?',
-  '29. Você recebe comentários desagradáveis por cor, orientação ou religião?',
-  '30. Você precisa esconder suas emoções no trabalho?',
-  '31. Sua empresa incentiva seu desenvolvimento no trabalho?',
-  '32. Os conflitos entre colaboradores são resolvidos de forma justa?',
-  '33. Você se sente irritado(a) no ambiente de trabalho?',
-  '34. Você se sente fracassado(a) no ambiente de trabalho?',
-  '35. Você pode confiar nos seus colegas de trabalho?',
-  '36. Você pode contar com colegas quando está em dificuldade?',
-  '37. Você se sente preocupado(a) referente ao trabalho?',
-  '38. Você é excluído(a) de grupos ou reuniões de trabalho?',
-  '39. Você se sente ansioso(a) no ambiente de trabalho?',
-  '40. Você se sente triste no ambiente de trabalho?',
-  '41. Você se sente pressionado(a) no ambiente de trabalho?',
-  '42. Você possui apoio do seu líder?',
-  '43. Você é tratado(a) de forma justa e respeitosa pela liderança?',
-  '44. Seu trabalho te faz se sentir bem consigo mesmo?',
-  '45. Você se sente motivado(a) com o trabalho que realiza?',
-  '46. Você se sente bem na sua profissão?',
-  '47. Você sente orgulho da sua profissão?',
-  '48. Você se sente confortável para falar de problemas pessoais no trabalho?',
-  '49. Você sente apoio da empresa para questões pessoais que interferem no trabalho?',
-  '50. Você se sente respeitado(a) na sua equipe?',
-  '51. Você acredita que a empresa se preocupa com sua saúde mental?'
-];
-
+const perguntasTextos = [...Array(51)].map((_, i) => `${i + 1}. Pergunta`);
 function checkPassword() {
-  const senha = document.getElementById('password').value;
-  if (senha === senhaCorreta) {
+  if (document.getElementById('password').value === senhaCorreta) {
     document.getElementById('login').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
     loadData();
@@ -109,22 +57,16 @@ function checkPassword() {
     document.getElementById('loginError').innerText = 'Senha incorreta!';
   }
 }
-
 async function loadData() {
   const url = 'https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados';
   const res = await fetch(url);
   globalData = await res.json();
   buildCharts();
 }
-
 function buildCharts() {
-  const perguntas = Array.from({ length: perguntasTextos.length }, (_, i) => `p${i + 1}`);
-  const respostasUnicas = {};
-  const colaboradores = [];
-  const empresas = [];
-
+  const perguntas = [...Array(51)].map((_, i) => `p${i + 1}`);
+  const respostasUnicas = {}, colaboradores = [], empresas = [];
   perguntas.forEach(p => respostasUnicas[p] = {});
-
   globalData.forEach(entry => {
     if (entry.nome_completo && !colaboradores.includes(entry.nome_completo)) colaboradores.push(entry.nome_completo);
     if (entry.empresa && !empresas.includes(entry.empresa)) empresas.push(entry.empresa);
@@ -133,48 +75,54 @@ function buildCharts() {
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
     });
   });
-
   document.getElementById('summary').innerHTML = `<strong>Colaboradores:</strong> ${colaboradores.join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${empresas.join(', ') || 'Nenhuma'}`;
-
   const chartsDiv = document.getElementById('charts');
   chartsDiv.innerHTML = '';
   const chartType = document.getElementById('chartType').value;
-
   perguntas.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = 'chart-container';
-    div.innerHTML = `<div class="question-label">${perguntasTextos[idx] || p}</div><canvas id="chart${idx}"></canvas>`;
+    div.innerHTML = `<div class="question-label">${perguntasTextos[idx]}</div><canvas id="chart${idx}"></canvas>`;
     chartsDiv.appendChild(div);
-
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
     const labels = Object.keys(respostasUnicas[p]);
     const values = Object.values(respostasUnicas[p]);
-
     new Chart(ctx, {
       type: chartType,
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Respostas',
-          data: values,
-          backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
-        }]
-      },
-      options: {
-        indexAxis: chartType === 'bar' ? 'y' : 'x',
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: chartType !== 'bar' } },
-        scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {}
-      }
+      data: { labels, datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] },
+      options: { indexAxis: chartType === 'bar' ? 'y' : 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar' } }, scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {} }
     });
   });
 }
-
-function reloadCharts() {
-  if (globalData) buildCharts();
+function reloadCharts() { if (globalData) buildCharts(); }
+async function exportPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p', 'mm', 'a4');
+  const chartsDiv = document.getElementById('charts');
+  await html2canvas(chartsDiv).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const imgProps = doc.getImageProperties(imgData);
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    doc.save('graficos.pdf');
+  });
+}
+async function exportImage() {
+  const chartsDiv = document.getElementById('charts');
+  await html2canvas(chartsDiv).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'graficos.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+function exportExcel() {
+  const ws = XLSX.utils.json_to_sheet(globalData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Respostas');
+  XLSX.writeFile(wb, 'respostas.xlsx');
 }
 </script>
-
 </body>
 </html>
