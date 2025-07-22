@@ -172,7 +172,24 @@ function buildCharts() {
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
     const labels = Object.keys(respostasUnicas[p] || {});
     const values = Object.values(respostasUnicas[p] || {});
-    new Chart(ctx, { type: chartType, data: { labels, datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] }, options: { indexAxis: chartType === 'bar' ? 'y' : 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar' } }, scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {} } });
+    new Chart(ctx, { 
+      type: chartType, 
+      data: { 
+        labels, 
+        datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] 
+      }, 
+      options: { 
+        indexAxis: chartType === 'bar' ? 'y' : 'x',
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { left: 40, right: 10, top: 10, bottom: 10 } },
+        plugins: { legend: { display: chartType !== 'bar' } },
+        scales: chartType === 'bar' || chartType === 'line' ? {
+          x: { beginAtZero: true, ticks: { callback: value => value.toString() } },
+          y: { beginAtZero: true, ticks: { autoSkip: false, maxRotation: 0, minRotation: 0 } }
+        } : {}
+      }
+    });
   });
 }
 
