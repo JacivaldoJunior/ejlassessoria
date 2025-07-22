@@ -126,8 +126,12 @@ function buildCharts() {
   perguntas.forEach(p => respostasUnicas[p] = {});
 
   globalData.forEach(entry => {
-    if (entry.nomecompleto && !colaboradores.includes(entry.nomecompleto)) colaboradores.push(entry.nomecompleto);
-    if (entry.empresa && !empresas.includes(entry.empresa)) empresas.push(entry.empresa);
+    const nome = entry.NomeCompleto || entry.nomecompleto || 'Desconhecido';
+    const empresa = entry.Empresa || entry.empresa || 'Desconhecida';
+
+    if (nome !== 'Desconhecido' && !colaboradores.includes(nome)) colaboradores.push(nome);
+    if (empresa !== 'Desconhecida' && !empresas.includes(empresa)) empresas.push(empresa);
+
     perguntas.forEach(p => {
       const resposta = entry[p] || 'Sem resposta';
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
