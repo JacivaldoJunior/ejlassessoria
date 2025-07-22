@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Painel de Gráficos - EJL Saúde e Segurança</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f8f5; }
@@ -12,27 +11,29 @@
     .center { text-align: center; margin-top: 50px; }
     input[type="password"] { padding: 10px; width: 200px; }
     button { padding: 10px 20px; background-color: #2e7d32; color: white; border: none; cursor: pointer; margin: 5px; }
-    .chart-container { margin: 30px 0; display: flex; align-items: center; }
+    .chart-container { margin: 30px 0; display: flex; flex-direction: column; align-items: center; }
     .chart-container canvas { max-height: 250px; max-width: 600px; }
     .summary { background: #e8f5e9; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
     select { margin: 10px; padding: 5px; }
-    .question-label { width: 300px; font-size: 0.9em; margin-right: 10px; }
+    .question-label { width: 100%; font-size: 1em; margin: 10px 0; text-align: center; }
   </style>
 </head>
 <body>
+
 <div id="login" class="center">
   <h2>Painel de Gráficos - Login</h2>
   <input type="password" id="password" placeholder="Digite a senha">
   <button onclick="checkPassword()">Entrar</button>
   <p id="loginError" style="color:red;"></p>
 </div>
+
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
   <div class="summary" id="summary"></div>
-  <label for="companyFilter">Empresa:</label>
-  <select id="companyFilter" onchange="buildCharts()"></select>
+  <label for="empresaSelect">Empresa:</label>
+  <select id="empresaSelect" onchange="reloadCharts()"></select>
   <label for="chartType">Tipo de Gráfico:</label>
-  <select id="chartType" onchange="buildCharts()">
+  <select id="chartType" onchange="reloadCharts()">
     <option value="bar">Coluna</option>
     <option value="pie">Pizza</option>
     <option value="doughnut">Rosca</option>
@@ -43,12 +44,69 @@
   <button onclick="exportPDF()">Exportar Gráficos</button>
   <div id="charts"></div>
 </div>
+
 <script>
 const senhaCorreta = 'admin123';
-let globalData = [];
-const perguntasTextos = Array.from({ length: 51 }, (_, i) => `${i + 1}. Pergunta ${i + 1}`);
+let globalData = null;
+let chartInstances = [];
+
+const perguntasTextos = [
+  'Você tem que realizar atividades que não fazem parte da sua função?',
+  'Sente-se tenso(a) no ambiente de trabalho?',
+  'A função que você exerce exige um ritmo de trabalho intenso?',
+  'É claro para você como deve executar seu serviço?',
+  'Seu trabalho exige novas ideias?',
+  'Você tem que lidar com diversas demandas ao mesmo tempo?',
+  'Seu trabalho exige que você saiba lidar com situações de tensão?',
+  'A empresa é justa no tratamento de seus colaboradores?',
+  'Você discorda de algumas funções que lhe são atribuídas?',
+  'Você tem que realizar atividades que considera moralmente erradas?',
+  'Você se sente inseguro(a) na sua habilidade de realizar tarefas?',
+  'Você se sente mentalmente exausto(a) no trabalho?',
+  'Você pode realizar seu trabalho sem pressa para entrega do serviço?',
+  'Você se sente reconhecido(a) pela gerência pelo trabalho desempenhado?',
+  'Você se sente tenso(a) durante sua atividade?',
+  'Você recebe comentários sexuais durante seu trabalho que te incomodam?',
+  'Você se sente sobrecarregado(a) com a quantidade de tarefas?',
+  'Você sofre desrespeito em seu ambiente de trabalho?',
+  'Você sente dificuldade para se concentrar?',
+  'Você pode controlar a quantidade de tarefas que será exercida?',
+  'No trabalho, você deve tomar decisões arriscadas?',
+  'A distribuição de tarefas entre os colaboradores é justa?',
+  'A empresa tem respeito pelo bem-estar dos colaboradores?',
+  'Seu trabalho exige prazos curtos para entrega de serviço?',
+  'Já recebeu ofensas no ambiente de trabalho de colegas ou líderes?',
+  'Você se sente descansado(a) ao acordar?',
+  'Já foi exposto publicamente com informações confidenciais?',
+  'Há colegas agressivos na maneira de falar e tratar você?',
+  'Você recebe comentários desagradáveis por cor, orientação ou religião?',
+  'Você precisa esconder suas emoções no trabalho?',
+  'Sua empresa incentiva seu desenvolvimento no trabalho?',
+  'Os conflitos entre colaboradores são resolvidos de forma justa?',
+  'Você se sente irritado(a) no ambiente de trabalho?',
+  'Você se sente fracassado(a) no ambiente de trabalho?',
+  'Você pode confiar nos seus colegas de trabalho?',
+  'Você pode contar com colegas quando está em dificuldade?',
+  'Você se sente preocupado(a) referente ao trabalho?',
+  'Você é excluído(a) de grupos ou reuniões de trabalho?',
+  'Você se sente ansioso(a) no ambiente de trabalho?',
+  'Você se sente triste no ambiente de trabalho?',
+  'Você se sente pressionado(a) no ambiente de trabalho?',
+  'Você possui apoio do seu líder?',
+  'Você é tratado(a) de forma justa e respeitosa pela liderança?',
+  'Seu trabalho te faz se sentir bem consigo mesmo?',
+  'Você se sente motivado(a) com o trabalho que realiza?',
+  'Você se sente bem na sua profissão?',
+  'Você sente orgulho da sua profissão?',
+  'Você se sente confortável para falar de problemas pessoais no trabalho?',
+  'Você sente apoio da empresa para questões pessoais que interferem no trabalho?',
+  'Você se sente respeitado(a) na sua equipe?',
+  'Você acredita que a empresa se preocupa com sua saúde mental?'
+];
+
 function checkPassword() {
-  if (document.getElementById('password').value === senhaCorreta) {
+  const senha = document.getElementById('password').value;
+  if (senha === senhaCorreta) {
     document.getElementById('login').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
     loadData();
@@ -56,49 +114,65 @@ function checkPassword() {
     document.getElementById('loginError').innerText = 'Senha incorreta!';
   }
 }
+
 async function loadData() {
-  const res = await fetch('https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados');
+  const url = 'https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados';
+  const res = await fetch(url);
   globalData = await res.json();
-  const empresas = [...new Set(globalData.map(e => e.Empresa || e.empresa || e.empresa_nome || 'Desconhecida'))];
-  const companySelect = document.getElementById('companyFilter');
-  companySelect.innerHTML = `<option value="">Todas</option>` + empresas.map(emp => `<option value="${emp}">${emp}</option>`).join('');
+  const empresas = [...new Set(globalData.map(e => e.empresa))].filter(e => e);
+  const empresaSelect = document.getElementById('empresaSelect');
+  empresaSelect.innerHTML = '<option value="Todas">Todas</option>' + empresas.map(e => `<option value="${e}">${e}</option>`).join('');
   buildCharts();
 }
+
 function buildCharts() {
+  chartInstances.forEach(c => c.destroy());
+  chartInstances = [];
+
   const perguntas = Array.from({ length: perguntasTextos.length }, (_, i) => `p${i + 1}`);
   const respostasUnicas = {};
-  const colaboradores = new Set();
-  const empresas = new Set();
-  const selectedCompany = document.getElementById('companyFilter').value;
+  const colaboradores = [];
+  const empresas = [];
+  const filtroEmpresa = document.getElementById('empresaSelect').value;
+
   perguntas.forEach(p => respostasUnicas[p] = {});
+
   globalData.forEach(entry => {
-    const nome = entry.NomeCompleto || entry.nomecompleto || entry.nome_completo;
-    const empresa = entry.Empresa || entry.empresa || entry.empresa_nome;
-    if (selectedCompany && empresa !== selectedCompany) return;
-    if (nome) colaboradores.add(nome);
-    if (empresa) empresas.add(empresa);
-    perguntas.forEach(p => {
-      const resposta = entry[p] || 'Sem resposta';
-      respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
-    });
+    if ((filtroEmpresa === 'Todas' || entry.empresa === filtroEmpresa)) {
+      if (entry.nome_completo && !colaboradores.includes(entry.nome_completo)) colaboradores.push(entry.nome_completo);
+      if (entry.empresa && !empresas.includes(entry.empresa)) empresas.push(entry.empresa);
+      perguntas.forEach(p => {
+        const resposta = entry[p] || 'Sem resposta';
+        respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
+      });
+    }
   });
-  document.getElementById('summary').innerHTML = `<strong>Colaboradores:</strong> ${[...colaboradores].join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${[...empresas].join(', ') || 'Nenhuma'}`;
+
+  document.getElementById('summary').innerHTML = `<strong>Colaboradores:</strong> ${colaboradores.join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${empresas.join(', ') || 'Nenhuma'}`;
+
   const chartsDiv = document.getElementById('charts');
   chartsDiv.innerHTML = '';
   const chartType = document.getElementById('chartType').value;
+
   perguntas.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = 'chart-container';
-    div.innerHTML = `<div class="question-label">${perguntasTextos[idx]}</div><canvas id="chart${idx}"></canvas>`;
+    div.innerHTML = `<div class="question-label">${idx + 1}. ${perguntasTextos[idx]}</div><canvas id="chart${idx}"></canvas>`;
     chartsDiv.appendChild(div);
+
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
     const labels = Object.keys(respostasUnicas[p]);
     const values = Object.values(respostasUnicas[p]);
-    new Chart(ctx, {
+
+    const chart = new Chart(ctx, {
       type: chartType,
       data: {
-        labels,
-        datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }]
+        labels: labels,
+        datasets: [{
+          label: 'Respostas',
+          data: values,
+          backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
+        }]
       },
       options: {
         indexAxis: chartType === 'bar' ? 'y' : 'x',
@@ -108,17 +182,29 @@ function buildCharts() {
         scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {}
       }
     });
+
+    chartInstances.push(chart);
   });
 }
-async function exportPDF() {
+
+function reloadCharts() {
+  if (globalData) buildCharts();
+}
+
+function exportPDF() {
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF('p', 'pt', 'a4');
-  const chartsArea = document.getElementById('charts');
-  const canvas = await html2canvas(chartsArea);
-  const imgData = canvas.toDataURL('image/png');
-  pdf.addImage(imgData, 'PNG', 20, 20, 555, 0);
-  pdf.save('graficos-ejl.pdf');
+  const pdf = new jsPDF();
+
+  chartInstances.forEach((chart, idx) => {
+    const imgData = chart.toBase64Image();
+    pdf.text(`${idx + 1}. ${perguntasTextos[idx]}`, 10, 10 + idx * 80);
+    pdf.addImage(imgData, 'PNG', 10, 15 + idx * 80, 180, 60);
+    if (idx !== chartInstances.length -1) pdf.addPage();
+  });
+
+  pdf.save('graficos.pdf');
 }
 </script>
+
 </body>
 </html>
