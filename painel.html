@@ -30,6 +30,10 @@
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
   <div class="summary" id="summary"></div>
+  <label for="empresaFilter">Filtrar por empresa:</label>
+  <select id="empresaFilter" onchange="reloadCharts()">
+    <option value="">Todas</option>
+  </select>
   <label for="chartType">Tipo de Gráfico:</label>
   <select id="chartType" onchange="reloadCharts()">
     <option value="bar">Coluna</option>
@@ -39,9 +43,7 @@
     <option value="radar">Radar</option>
     <option value="polarArea">Área Polar</option>
   </select>
-  <button onclick="exportPDF()">Exportar PDF</button>
-  <button onclick="exportImage()">Exportar Imagem</button>
-  <button onclick="exportExcel()">Exportar Excel</button>
+  <button onclick="exportAll()">Exportar ▼</button>
   <div id="charts"></div>
 </div>
 <script>
@@ -62,14 +64,24 @@ async function loadData() {
   const url = 'https://opensheet.elk.sh/1JEfiKZUMsJv8fGDl1MRTRarItsLWXVYAeAnyWr93ECI/dados';
   const res = await fetch(url);
   globalData = await res.json();
+  const empresaSelect = document.getElementById('empresaFilter');
+  const empresas = [...new Set(globalData.map(d => d.empresa || d.Empresa))];
+  empresas.forEach(emp => {
+    const opt = document.createElement('option');
+    opt.value = emp;
+    opt.text = emp;
+    empresaSelect.add(opt);
+  });
   buildCharts();
 }
 function buildCharts() {
+  const selectedEmpresa = document.getElementById('empresaFilter').value;
   const perguntas = [...Array(51)].map((_, i) => `p${i + 1}`);
   const respostasUnicas = {}, colaboradores = [], empresas = [];
   globalData.forEach(entry => {
     const nome = entry.nome_completo || entry.NomeCompleto || entry.nomeCompleto;
     const empresa = entry.empresa || entry.Empresa;
+    if (selectedEmpresa && empresa !== selectedEmpresa) return;
     if (nome && !colaboradores.includes(nome)) colaboradores.push(nome);
     if (empresa && !empresas.includes(empresa)) empresas.push(empresa);
     perguntas.forEach(p => {
@@ -88,16 +100,17 @@ function buildCharts() {
     div.innerHTML = `<div class="question-label">${perguntasTextos[idx]}</div><canvas id="chart${idx}"></canvas>`;
     chartsDiv.appendChild(div);
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
-    const labels = Object.keys(respostasUnicas[p]);
-    const values = Object.values(respostasUnicas[p]);
-    new Chart(ctx, {
-      type: chartType,
-      data: { labels, datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] },
-      options: { indexAxis: chartType === 'bar' ? 'y' : 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar' } }, scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {} }
-    });
+    const labels = Object.keys(respostasUnicas[p] || {});
+    const values = Object.values(respostasUnicas[p] || {});
+    new Chart(ctx, { type: chartType, data: { labels, datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] }, options: { indexAxis: chartType === 'bar' ? 'y' : 'x', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar' } }, scales: chartType === 'bar' || chartType === 'line' ? { x: { beginAtZero: true }, y: { beginAtZero: true } } : {} } });
   });
 }
 function reloadCharts() { if (globalData) buildCharts(); }
+function exportAll() {
+  if (confirm('Escolha OK para exportar PDF, Cancelar para imagem, ou aguarde para Excel.')) exportPDF();
+  else if (confirm('Exportar como imagem?')) exportImage();
+  else exportExcel();
+}
 async function exportPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
