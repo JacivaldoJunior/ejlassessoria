@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Painel de Gráficos - EJL Saúde e Segurança</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -34,10 +35,12 @@
 <div id="panel" class="hidden">
   <h1>Painel de Gráficos - EJL Saúde e Segurança</h1>
   <div class="summary" id="summary"></div>
+
   <label for="empresaFilter">Filtrar por empresa:</label>
   <select id="empresaFilter" onchange="reloadCharts()">
     <option value="">Todas</option>
   </select>
+
   <label for="chartType">Tipo de Gráfico:</label>
   <select id="chartType" onchange="reloadCharts()">
     <option value="bar">Coluna</option>
@@ -56,6 +59,8 @@
       <div onclick="exportExcel()">📊 Exportar Excel</div>
     </div>
   </div>
+
+  <button onclick="limparGraficos()">🧹 Limpar Gráficos</button>
 
   <div id="charts"></div>
 </div>
@@ -135,6 +140,7 @@ async function loadData() {
   globalData = await res.json();
   const empresaSelect = document.getElementById('empresaFilter');
   const empresas = [...new Set(globalData.map(d => d.empresa || d.Empresa))];
+  empresaSelect.innerHTML = '<option value="">Todas</option>';
   empresas.forEach(emp => {
     const opt = document.createElement('option');
     opt.value = emp;
@@ -160,40 +166,66 @@ function buildCharts() {
       respostasUnicas[p][resposta] = (respostasUnicas[p][resposta] || 0) + 1;
     });
   });
-  document.getElementById('summary').innerHTML = `<strong>Colaboradores:</strong> ${colaboradores.join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${empresas.join(', ') || 'Nenhuma'}`;
+
+  document.getElementById('summary').innerHTML =
+    `<strong>Colaboradores:</strong> ${colaboradores.join(', ') || 'Nenhum'}<br><strong>Empresas:</strong> ${empresas.join(', ') || 'Nenhuma'}`;
+
   const chartsDiv = document.getElementById('charts');
   chartsDiv.innerHTML = '';
   const chartType = document.getElementById('chartType').value;
+
   perguntas.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = 'chart-container';
     div.innerHTML = `<div class="question-label">${perguntasTextos[idx]}</div><canvas id="chart${idx}"></canvas>`;
     chartsDiv.appendChild(div);
+
     const ctx = document.getElementById(`chart${idx}`).getContext('2d');
     const labels = Object.keys(respostasUnicas[p] || {});
     const values = Object.values(respostasUnicas[p] || {});
-    new Chart(ctx, { 
-      type: chartType, 
-      data: { 
-        labels, 
-        datasets: [{ label: 'Respostas', data: values, backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`) }] 
-      }, 
-      options: { 
+    const total = values.reduce((a, b) => a + b, 0);
+    const chart = new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels,
+        datasets: [{
+          label: 'Respostas',
+          data: values,
+          backgroundColor: labels.map(() => `hsl(${Math.random() * 360},70%,60%)`)
+        }]
+      },
+      options: {
         indexAxis: chartType === 'bar' ? 'y' : 'x',
         responsive: true,
         maintainAspectRatio: false,
         layout: { padding: { left: 40, right: 10, top: 10, bottom: 10 } },
-        plugins: { legend: { display: chartType !== 'bar' } },
-        scales: chartType === 'bar' || chartType === 'line' ? {
-          x: { beginAtZero: true, ticks: { callback: value => value.toString() } },
-          y: { beginAtZero: true, ticks: { autoSkip: false, maxRotation: 0, minRotation: 0 } }
+        plugins: {
+          legend: { display: chartType !== 'bar' },
+          datalabels: {
+            color: '#000',
+            font: { weight: 'bold' },
+            formatter: (value) => `${((value / total) * 100).toFixed(1)}%`
+          }
+        },
+        scales: (chartType === 'bar' || chartType === 'line') ? {
+          x: { beginAtZero: true },
+          y: { beginAtZero: true }
         } : {}
-      }
+      },
+      plugins: [ChartDataLabels]
     });
   });
 }
 
-function reloadCharts() { if (globalData) buildCharts(); }
+function reloadCharts() {
+  if (globalData) buildCharts();
+}
+
+function limparGraficos() {
+  document.getElementById('charts').innerHTML = '';
+  document.getElementById('summary').innerHTML = '';
+  document.getElementById('empresaFilter').value = '';
+}
 
 function toggleExportMenu() {
   const menu = document.getElementById('exportMenu');
